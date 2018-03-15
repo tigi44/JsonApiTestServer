@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <h1><%= title %></h1>
+
+    <div style="width:40%; float:left;">
+    <% if(files.length > 0){ %>
+      <% files.forEach(function(file) { %>
+        <p><a href="<%= file %>"><%= file %></a> <button onclick="deleteJsonButton(event);" style="color:red; float:right;">Delete</button><button onclick="showJsonButton(event);" style="float:right;">ShowJson</button><p>
+      <% }); %>
+    <% } %>
+  </div>
+
+  <div style="width:50%; float:right;">
+      <input type="text" id="input_json_url" style="width:50%; height:20px;"></input> <button onclick="addJsonButton(event);" style="color:red; float:right;">Add</button><button onclick="validateJsonButton(event);" style="float:right;">Validate</button>
+      <textarea id="textarea_json" style="width:100%;height:500px;margin-top:10px;"></textarea>
+  </div>
+
+  </body>
+
+  <script>
+    function showJsonButton(e) {
+      var target = e.target;
+      var aTagEl = target.previousElementSibling.previousElementSibling;
+      var requestUrl = aTagEl.text;
+      //console.log(requestUrl);
+
+      requestXhttp(requestUrl, "GET", null, function(data) {
+        document.getElementById('input_json_url').value = aTagEl.text;
+        document.getElementById('textarea_json').value = data;
+      });
+    }
+
+    function deleteJsonButton(e) {
+      var target = e.target;
+      var aTagEl = target.previousElementSibling;
+      var requestUrl = aTagEl.text;
+      //console.log(requestUrl);
+
+      if (confirm(requestUrl + " 항목을 삭제하시겠습니까?")) {
+        requestXhttp(requestUrl, "DELETE", null, function(data) {
+          location.reload();
+        });
+      }
+    }
+
+    function addJsonButton(e) {
+      var target = e.target;
+      var inputTagEl = target.previousElementSibling;
+      var requestUrl = inputTagEl.value;
+      // console.log(requestUrl);
+      var json = document.getElementById('textarea_json').value;
+
+      requestXhttp(requestUrl, "POST", 'json=' + json, function(data) {
+        location.reload();
+      });
+    }
+
+    function validateJsonButton(e) {
+      try {
+        var json = document.getElementById('textarea_json').value;
+        JSON.parse(json);
+        alert('ok');
+      } catch(e) {
+        alert(e.message);
+      }
+    }
+
+    function requestXhttp(url, method, data, successCallback) {
+      var xhttp;
+      xhttp=new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          successCallback(this.responseText);
+        } else if (this.readyState == 4 && this.status != 200) {
+          alert("Server Error : " + this.responseText);
+          // console.log(this);
+        }
+      };
+      xhttp.open(method, url, true);
+      if (method == 'POST') {
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      }
+      xhttp.send(data);
+    }
+  </script>
+</html>
