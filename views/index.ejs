@@ -30,9 +30,12 @@
       var requestUrl = aTagEl.text;
       //console.log(requestUrl);
 
-      requestXhttp(requestUrl, "GET", null, function(data) {
+      requestXhttp(requestUrl, "GET", null, function(jsonString) {
+        var json = JSON.parse(jsonString);
+        var prettyJsonString = JSON.stringify(json, undefined, 4);
+
         document.getElementById('input_json_url').value = aTagEl.text;
-        document.getElementById('textarea_json').value = data;
+        document.getElementById('textarea_json').value = prettyJsonString;
       });
     }
 
@@ -63,9 +66,11 @@
 
     function validateJsonButton(e) {
       try {
-        var json = document.getElementById('textarea_json').value;
-        JSON.parse(json);
-        alert('ok');
+        var jsonString = document.getElementById('textarea_json').value;
+        var json = JSON.parse(jsonString);
+        var prettyJsonString = JSON.stringify(json, undefined, 4);
+
+        document.getElementById('textarea_json').value = prettyJsonString;
       } catch(e) {
         alert(e.message);
       }

@@ -34,7 +34,11 @@ $ DEBUG=jsonapitestserver:* npm start
 ## FEATURE
 - NodeJS
 - express module
-- ~~ajv module~~
+
+### RESTful API
+- GET : application/json
+- POST : x-www-form-urlencoded `json : data....`
+- DELETE
 
 ## set env....
 ```
