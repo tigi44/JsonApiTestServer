@@ -37,7 +37,7 @@ $ DEBUG=jsonapitestserver:* npm start
 
 ### RESTful API
 - GET : application/json
-- POST : x-www-form-urlencoded `json : data....`
+- POST : x-www-form-urlencoded `json : jsonString....`
 - DELETE
 
 ## set env....

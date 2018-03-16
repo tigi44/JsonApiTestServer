@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var path = require('path');
-var Ajv = require('ajv');
 
 router.get('/', function(req, res, next) {
   res.setHeader('Content-Type', 'application/json');
