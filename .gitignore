@@ -30,4 +30,5 @@ node_modules
 npm-debug.log
 
 # api result json file
-jsonFile/
+jsonFile/*
+!jsonFile/test.json
