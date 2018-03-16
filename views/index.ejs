@@ -59,7 +59,7 @@
       // console.log(requestUrl);
       var json = document.getElementById('textarea_json').value;
 
-      requestXhttp(requestUrl, "POST", 'json=' + json, function(data) {
+      requestXhttp(requestUrl, "POST", 'json=' + encodeURIComponent(json), function(data) {
         location.reload();
       });
     }
@@ -78,7 +78,7 @@
 
     function requestXhttp(url, method, data, successCallback) {
       var xhttp;
-      xhttp=new XMLHttpRequest();
+      xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           successCallback(this.responseText);
