@@ -1,6 +1,10 @@
 # JsonApiTestServer
 [![Build Status](https://travis-ci.org/tigi44/JsonApiTestServer.svg?branch=master)](https://travis-ci.org/tigi44/JsonApiTestServer)
 
+## FEATURE
+- [NodeJS](https://nodejs.org)
+- [express](https://www.npmjs.com/package/express) module
+
 ## NodeJS
 - install NodeJS : Latest Current Version version
 - this project using v9.8.0
@@ -30,20 +34,29 @@ $ PORT=8080 npm start
 ```
 $ DEBUG=jsonapitestserver:* npm start
 ```
+- node env
+```
+$ NODE_ENV=development npm start
+$ NODE_ENV=production npm start
+```
 
-## FEATURE
-- NodeJS
-- express module
-
-### RESTful API
-- GET : application/json
-- POST : x-www-form-urlencoded `json : jsonString....`
+## RESTful API
+- GET
 - DELETE
+- POST : BODY - raw data, application/json
+![Image](./public/readmeImage/example_post_body.png)
 
-## set env....
+
+## #set env....
 ```
 $ export NODE_ENV=development
-```
-```
 $ export NODE_ENV=production
 ```
+```
+$ export DEBUG=jsonapitestserver:*
+```
+
+## #package
+### nodemon
+- auto restart nodejs package
+- https://www.npmjs.com/package/nodemon

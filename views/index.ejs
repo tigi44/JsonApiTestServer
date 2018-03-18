@@ -64,7 +64,7 @@
       // console.log(requestUrl);
       var jsonString = _textareaJsonEl.value;
 
-      requestXhttp(requestUrl, "POST", 'json=' + encodeURIComponent(jsonString),
+      requestXhttp(requestUrl, "POST", jsonString,
       function(data) {
         location.reload();
       },
@@ -116,9 +116,7 @@
         }
       };
       xhttp.open(method, url, true);
-      if (method == 'POST') {
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      }
+      xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send(data);
     }
   </script>

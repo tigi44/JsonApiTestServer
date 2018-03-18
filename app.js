@@ -22,6 +22,16 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// set response header
+app.use(function(req, res, next) {
+  if (req.path.endsWith('.json')) {
+    res.setHeader('Content-Type', 'application/json');
+  } else {
+    res.setHeader('Content-Type', 'text/html');
+  }
+  next();
+});
+
 app.use('/', index);
 app.use('/*.json', jsonFile);
 
@@ -40,7 +50,13 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  if (req.path.endsWith('.json')) {
+    // .json error result
+    res.json(err.message);
+  } else {
+    // error page render
+    res.render('error');
+  }
 });
 
 module.exports = app;

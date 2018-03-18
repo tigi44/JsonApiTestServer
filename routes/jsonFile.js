@@ -2,13 +2,12 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var path = require('path');
+var url = require('url');
 
+// get
 router.get('/', function(req, res, next) {
-  res.setHeader('Content-Type', 'application/json');
-
   var resultData;
-  var filepath = req.originalUrl;
-  filepath = path.join('./jsonFile', filepath);
+  var filepath = getFilePathByRequest(req);
 
   try {
     // filepath로 해당 파일을 찾은 경우 json으로 출력
@@ -23,12 +22,10 @@ router.get('/', function(req, res, next) {
   res.json(resultData);
 });
 
+// delete
 router.delete('/', function(req, res, next) {
-  res.setHeader('Content-Type', 'application/json');
-
   var resultData;
-  var filepath = req.originalUrl;
-  filepath = path.join('./jsonFile', filepath);
+  var filepath = getFilePathByRequest(req);
 
   try {
     fs.unlinkSync(filepath);
@@ -41,23 +38,11 @@ router.delete('/', function(req, res, next) {
   res.json(resultData);
 });
 
+// post
 router.post('/', function(req, res, next) {
-  res.setHeader('Content-Type', 'application/json');
-
   var resultData;
-  var json;
-  var jsonData = req.body.json;
-  var filepath = req.originalUrl;
-  filepath = path.join('./jsonFile', filepath);
-
-  try {
-    json = JSON.parse(jsonData);
-  } catch(e) {
-    // console.log(e);
-    res.status(500);
-    res.json(e.message);
-    return;
-  }
+  var json = req.body;
+  var filepath = getFilePathByRequest(req);
 
   try {
     mkdirp(filepath);
@@ -70,6 +55,11 @@ router.post('/', function(req, res, next) {
   }
   res.json(resultData);
 });
+
+function getFilePathByRequest(req) {
+  var urlPath = url.parse(req.originalUrl).pathname;
+  return path.join('./jsonFile', urlPath);
+}
 
 function mkdirp(filepath) {
   var dirname = path.dirname(filepath);
