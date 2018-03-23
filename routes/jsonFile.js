@@ -1,8 +1,8 @@
 var express = require('express');
-var router = express.Router();
-var fs = require('fs');
-var path = require('path');
-var url = require('url');
+var router  = express.Router();
+var fs      = require('fs');
+var path    = require('path');
+var url     = require('url');
 
 // get
 router.get('/', function(req, res, next) {

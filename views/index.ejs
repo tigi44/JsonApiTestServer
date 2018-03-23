@@ -11,43 +11,72 @@
     <div style="width:40%; float:left;">
     <% if(files.length > 0){ %>
       <% files.forEach(function(file) { %>
-        <p><a href="<%= file %>" target="_blank"><%= file %></a> <button onclick="deleteJsonButton(event);" style="color:red; float:right;">Delete</button><button onclick="showJsonButton(event);" style="float:right;">ShowJson</button></p>
+        <p>
+          <a href="<%= file %>" target="_blank"><%= file %></a>
+          <button onclick="deleteJsonButton(event);" style="color:red; float:right;">Delete</button>
+          <button onclick="showJsonButton(event);" style="float:right;">ShowJson</button>
+        </p>
       <% }); %>
     <% } %>
   </div>
 
-  <div style="width:40%; position:fixed; right:50px;">
-      <input type="text" id="input_json_url" style="width:50%; height:20px;"></input> <button onclick="addJsonButton(event);" style="color:blue; float:right; font-size: 13px;">Add</button><button onclick="validateJsonButton(event);" style="float:right; font-size: 13px;">Validate</button>
-      <textarea id="textarea_json" style="width:100%; height:400px; margin-top:10px;"></textarea>
+  <div style="width:40%; height:100%; position:fixed; right:50px;">
+      <input type="text" id="input_json_url" style="width:50%; height:20px;"></input>
+      <button onclick="addJsonButton(event);" style="color:blue; font-size: 13px;">Add</button>
+      <div id="jsoneditor" style="width:100%; height:60%; margin-top:20px;"></div>
+      <button onclick="validateJsonButton(event);" style="float: right; font-size: 20px;">Validate</button>
       <span id="span_validate_result"style="width:100%; word-wrap:break-word; margin-top:10px;"></span>
   </div>
 
+
   </body>
 
+  <link href="/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
+  <script src="/jsoneditor/dist/jsoneditor.min.js"></script>
   <script>
     var _spanValidateResultEl = document.getElementById('span_validate_result');
-    var _inputJsonUrlEl = document.getElementById('input_json_url');
-    var _textareaJsonEl = document.getElementById('textarea_json');
+    var _inputJsonUrlEl       = document.getElementById('input_json_url');
+    var jsonEditorMode        = ['code' /*, 'text'*/ , 'tree' /*, 'view'*/ /*, 'form'*/];
+    var container             = document.getElementById("jsoneditor");
+    var options               = {
+                                  modes : jsonEditorMode,
+                                  onError : onError,
+                                  onModeChange : onModeChange
+                                };
+    var editor                = new JSONEditor(container, options);
+
+    function onError(error) {
+      errorValidateResult(error);
+    }
+
+    function onModeChange(newMode, oldMode) {
+      jsonEditorExpandAll(newMode);
+    }
+
+    function jsonEditorExpandAll(mode) {
+      if (mode == 'tree')
+        editor.expandAll();
+    }
 
     function showJsonButton(e) {
-      var target = e.target;
-      var aTagEl = target.previousElementSibling.previousElementSibling;
-      var requestUrl = aTagEl.text;
+      var target      = e.target;
+      var aTagEl      = target.previousElementSibling.previousElementSibling;
+      var requestUrl  = aTagEl.text;
       //console.log(requestUrl);
 
       requestXhttp(requestUrl, "GET", null, function(jsonString) {
         var json = JSON.parse(jsonString);
-        var prettyJsonString = JSON.stringify(json, undefined, 4);
 
         _inputJsonUrlEl.value = aTagEl.text;
-        _textareaJsonEl.value = prettyJsonString;
+        editor.set(json);
+        jsonEditorExpandAll(editor.getMode());
       });
     }
 
     function deleteJsonButton(e) {
-      var target = e.target;
-      var aTagEl = target.previousElementSibling;
-      var requestUrl = aTagEl.text;
+      var target      = e.target;
+      var aTagEl      = target.previousElementSibling;
+      var requestUrl  = aTagEl.text;
       //console.log(requestUrl);
 
       if (confirm(requestUrl + " 항목을 삭제하시겠습니까?")) {
@@ -58,11 +87,11 @@
     }
 
     function addJsonButton(e) {
-      var target = e.target;
-      var inputTagEl = target.previousElementSibling;
-      var requestUrl = inputTagEl.value;
+      var target      = e.target;
+      var inputTagEl  = target.previousElementSibling;
+      var requestUrl  = inputTagEl.value;
+      var jsonString  = editor.getText();
       // console.log(requestUrl);
-      var jsonString = _textareaJsonEl.value;
 
       requestXhttp(requestUrl, "POST", jsonString,
       function(data) {
@@ -74,33 +103,29 @@
     }
 
     function validateJsonButton(e) {
-      var validateResult;
-      var validateResultColor;
       try {
-        var jsonString = _textareaJsonEl.value;
-        var json = JSON.parse(jsonString);
+        var json             = editor.get();
         var prettyJsonString = JSON.stringify(json, undefined, 4);
 
-        _textareaJsonEl.value = prettyJsonString;
+        editor.set(JSON.parse(prettyJsonString));
+        jsonEditorExpandAll(editor.getMode());
         successValidateResult();
-      } catch(e) {
-        // alert(e.message);
-        errorValidateResult(e.message);
+      } catch(error) {
+        errorValidateResult(error);
       }
     }
 
     function successValidateResult() {
-      _spanValidateResultEl.style.color = '#0a5';
-      _spanValidateResultEl.innerHTML = 'Success Validation!';
+      _spanValidateResultEl.style.color   = '#0a5';
+      _spanValidateResultEl.innerHTML     = 'Success Validation!';
     }
     function errorValidateResult(validateResult) {
-      _spanValidateResultEl.style.color = '#f00';
-      _spanValidateResultEl.innerHTML = validateResult;
+      _spanValidateResultEl.style.color   = '#f00';
+      _spanValidateResultEl.innerHTML     = validateResult;
     }
 
     function requestXhttp(url, method, data, successCallback, errorCallback) {
-      var xhttp;
-      xhttp = new XMLHttpRequest();
+      var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           if (successCallback) {
