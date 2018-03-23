@@ -8,16 +8,27 @@
 
     <h1><%= title %></h1>
 
-    <div style="width:40%; float:left;">
-    <% if(files.length > 0){ %>
-      <% files.forEach(function(file) { %>
-        <p>
-          <a href="<%= file %>" target="_blank"><%= file %></a>
-          <button onclick="deleteJsonButton(event);" style="color:red; float:right;">Delete</button>
-          <button onclick="showJsonButton(event);" style="float:right;">ShowJson</button>
-        </p>
-      <% }); %>
-    <% } %>
+    <div style="width:40%; float:left; margin-top: 10px;">
+      <% var keys = Object.keys(hierarchyFiles); %>
+      <% if(keys.length > 0){ %>
+        <% keys.forEach(function(key) { %>
+          <div style="margin-top: 30px;border-top: 1px solid #eee;">
+          <strong style="font-size: 20px;"><%= key %></strong>
+          <div>
+            <% var files = hierarchyFiles[key]; %>
+            <% if(files.length > 0){ %>
+              <% files.forEach(function(file) { %>
+                <p>
+                  <a href="<%= file %>" target="_blank"><%= file %></a>
+                  <button onclick="deleteJsonButton(event);" style="color:red; float:right;">Delete</button>
+                  <button onclick="showJsonButton(event);" style="float:right;">ShowJson</button>
+                </p>
+              <% }); %>
+            <% } %>
+          </div>
+          </div>
+        <% }); %>
+      <% } %>
   </div>
 
   <div style="width:40%; height:100%; position:fixed; right:50px;">

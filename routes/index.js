@@ -9,29 +9,48 @@ router.get('/', function(req, res, next) {
 
   res.render('index', {
     title       : 'JSON API TEST',
-    files       : files
+    hierarchyFiles   : hierarchyFiles(files)
   });
 });
 
 function findFiles(startPath) {
-    if (!fs.existsSync(startPath)){
-        console.log("No file dir ", startPath);
-        return;
+  if (!fs.existsSync(startPath)){
+      console.log("No file dir ", startPath);
+      return;
+  }
+
+  var fileNames = [];
+  var files = fs.readdirSync(startPath);
+  for(var i = 0; i < files.length; i++){
+      var filename = path.join(startPath, files[i]);
+      var stat = fs.lstatSync(filename);
+      if (stat.isDirectory()) {
+        fileNames = fileNames.concat(findFiles(filename));
+      } else {
+        filename = filename.replace('jsonFile', '');
+        fileNames.push(filename);
+      }
+  }
+  return fileNames;
+}
+
+function hierarchyFiles(files) {
+  var hierarchyFile = {};
+  for (var key in files) {
+    var fileName = files[key];
+    var topFolder = fileName.match(/\/.*\//gi);
+
+    if (!topFolder) {
+      topFolder = " ";
     }
 
-    var fileNames = [];
-    var files = fs.readdirSync(startPath);
-    for(var i = 0; i < files.length; i++){
-        var filename = path.join(startPath, files[i]);
-        var stat = fs.lstatSync(filename);
-        if (stat.isDirectory()) {
-          fileNames = fileNames.concat(findFiles(filename));
-        } else {
-          filename = filename.replace('jsonFile', '');
-          fileNames.push(filename);
-        }
+    if (!hierarchyFile[topFolder]) {
+      hierarchyFile[topFolder] = [];
     }
-    return fileNames;
+
+    hierarchyFile[topFolder].push(fileName);
+  }
+  return hierarchyFile;
 }
 
 module.exports = router;
