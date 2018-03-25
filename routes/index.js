@@ -3,12 +3,19 @@ var router  = express.Router();
 var fs      = require('fs');
 var path    = require('path');
 
+/* GET json path list */
+router.get('/.json', function(req, res, next) {
+  var files = findFiles('./jsonFile');
+
+  res.json(hierarchyFiles(files));
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var files = findFiles('./jsonFile');
 
   res.render('index', {
-    title       : 'JSON API TEST',
+    title       : 'JSON API TEST SERVER',
     hierarchyFiles   : hierarchyFiles(files)
   });
 });
@@ -38,17 +45,21 @@ function hierarchyFiles(files) {
   var hierarchyFile = {};
   for (var key in files) {
     var fileName = files[key];
-    var topFolder = fileName.match(/\/.*\//gi);
+    var topFolderName = fileName.match(/\/.*\//gi);
 
-    if (!topFolder) {
-      topFolder = " ";
+    if (topFolderName) {
+      topFolderName = topFolderName.toString();
+      topFolderName = topFolderName.replace(/^\//, "");
+      topFolderName = topFolderName.replace(/\/$/, "");
+    } else {
+      topFolderName = "";
     }
 
-    if (!hierarchyFile[topFolder]) {
-      hierarchyFile[topFolder] = [];
+    if (!hierarchyFile[topFolderName]) {
+      hierarchyFile[topFolderName] = [];
     }
 
-    hierarchyFile[topFolder].push(fileName);
+    hierarchyFile[topFolderName].push(fileName);
   }
   return hierarchyFile;
 }
