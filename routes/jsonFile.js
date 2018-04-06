@@ -29,7 +29,7 @@ router.delete('/', function(req, res, next) {
 
   try {
     fs.unlinkSync(filepath);
-    resultData = 'OK';
+    resultData = 'Success Delete';
   } catch(e) {
     // console.log(e);
     resultData = 'Fail Delete';
@@ -47,10 +47,10 @@ router.post('/', function(req, res, next) {
   try {
     mkdirp(filepath);
     fs.writeFileSync(filepath, JSON.stringify(json), 'utf8');
-    resultData = 'OK';
+    resultData = json;
   } catch(e) {
     // console.log(e);
-    resultData = 'Fail Add';
+    resultData = 'Fail Post';
     res.status(500);
   }
   res.json(resultData);
