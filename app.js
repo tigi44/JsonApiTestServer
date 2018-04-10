@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // set response header
 app.use(function(req, res, next) {
-  if (req.path.endsWith('.json')) {
+  if (path.extname(req.path) == '.json') {
     res.setHeader('Content-Type', 'application/json');
   }
   next();
