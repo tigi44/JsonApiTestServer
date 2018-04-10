@@ -35,7 +35,9 @@ function findFiles(startPath) {
         fileNames = fileNames.concat(findFiles(filename));
       } else {
         filename = filename.replace('jsonFile', '');
-        fileNames.push(filename);
+        if (path.extname(filename) == '.json') {
+          fileNames.push(filename);
+        }
       }
   }
   return fileNames;
@@ -52,7 +54,7 @@ function hierarchyFiles(files) {
       topFolderName = topFolderName.replace(/^\//, "");
       topFolderName = topFolderName.replace(/\/$/, "");
     } else {
-      topFolderName = "";
+      topFolderName = "/";
     }
 
     if (!hierarchyFile[topFolderName]) {

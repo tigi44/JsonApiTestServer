@@ -58,7 +58,7 @@ router.post('/', function(req, res, next) {
 
 function getFilePathByRequest(req) {
   var urlPath = url.parse(req.originalUrl).pathname;
-  return path.join('./jsonFile', urlPath);
+  return path.join('./jsonFile', urlPath.toLowerCase());
 }
 
 function mkdirp(filepath) {

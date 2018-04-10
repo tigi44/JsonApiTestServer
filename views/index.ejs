@@ -2,48 +2,98 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="/javascripts/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/styleIndex.css' />
   </head>
   <body>
+    <header>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+          <a id="a-logo" href="/"></a>
+          <a class="navbar-brand" href="/"><%= title %></a>
+          <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button> -->
 
-    <h1><%= title %></h1>
+          <!-- <div class="collapse navbar-collapse" id="navbarsExample02">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-md-0">
+              <input class="form-control" type="text" placeholder="Search">
+            </form>
+          </div> -->
+    </nav>
+  </header>
 
-    <div style="width:40%; float:left; margin-top: 10px;">
+  <main class="container" role="main">
+    <div class="filepath">
       <% var keys = Object.keys(hierarchyFiles); %>
       <% if(keys.length > 0){ %>
         <% keys.forEach(function(key) { %>
-          <div style="margin-top: 30px;border-top: 1px solid #eee;">
-          <strong style="font-size: 20px;"><%= key %></strong>
-          <div>
-            <% var files = hierarchyFiles[key]; %>
-            <% if(files.length > 0){ %>
-              <% files.forEach(function(file) { %>
-                <p>
-                  <a href="<%= file %>" target="_blank"><%= file %></a>
-                  <button onclick="deleteJsonButton(event);" style="color:red; float:right;">Delete</button>
-                  <button onclick="showJsonButton(event);" style="float:right;">ShowJson</button>
-                </p>
-              <% }); %>
-            <% } %>
-          </div>
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button class="btn btn-link btn-card-header" data-toggle="collapse" data-target="#<%= key %>" aria-expanded="false" aria-controls="collapseOne">
+                  <%= key %>
+                </button>
+              </h5>
+            </div>
+
+            <div id="<%= key %>" class="table-responsive collapse show">
+              <table class="table table-striped table-sm card-body">
+                <colgroup>
+                  <col style="width:70%">
+                  <col style="width:10%">
+                  <col style="width:10%">
+                  <col style="width:10%">
+                </colgroup>
+                <thead>
+                </thead>
+                <tbody>
+                  <% var files = hierarchyFiles[key]; %>
+                  <% if(files.length > 0){ %>
+                    <% files.forEach(function(file) { %>
+                      <tr>
+                        <td><a href="<%= file %>" target="_blank" style="margin-left:5px;"><%= file %></a></td>
+                        <td><button onclick="showJsonButton(event);" class="btn btn-dark btn-sm">Show</button></td>
+                        <td><button onclick="deleteJsonButton(event);" class="btn btn-danger btn-sm">Delete</button></td>
+                      </tr>
+                    <% }); %>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
           </div>
         <% }); %>
       <% } %>
-  </div>
+    </div>
 
-  <div style="width:40%; height:100%; position:fixed; right:50px;">
-      <input type="text" id="input_json_url" style="width:50%; height:20px;"></input>
-      <button onclick="addJsonButton(event);" style="color:blue; font-size: 13px;">Add</button>
-      <div id="jsoneditor" style="width:100%; height:60%; margin-top:20px;"></div>
-      <button onclick="validateJsonButton(event);" style="float: right; font-size: 20px;">Validate</button>
-      <span id="span_validate_result"style="width:100%; word-wrap:break-word; margin-top:10px;"></span>
-  </div>
+    <div class="jumbotron json-edit">
+        <div class="input-group mb-3">
+          <input type="text" id="input_json_url" class="form-control" placeholder="JSON API URL" aria-label="JSON API URL" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-dark" type="button" onclick="addJsonButton(event);">Add</button>
+          </div>
+        </div>
+
+        <div id="jsoneditor"></div>
+        <button onclick="validateJsonButton(event);" class="btn btn-dark btn-validate">Validate</button>
+        <span id="span_validate_result"></span>
+    </div>
+  </main>
 
 
   </body>
-
-  <link href="/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
-  <script src="/jsoneditor/dist/jsoneditor.min.js"></script>
+  <script src="/javascripts/jsoneditor/dist/jsoneditor.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script>
     var _spanValidateResultEl = document.getElementById('span_validate_result');
     var _inputJsonUrlEl       = document.getElementById('input_json_url');
@@ -71,14 +121,14 @@
 
     function showJsonButton(e) {
       var target      = e.target;
-      var aTagEl      = target.previousElementSibling.previousElementSibling;
-      var requestUrl  = aTagEl.text;
+      var $aTag      = $(target).parents("tr").find("a");
+      var requestUrl  = $aTag.text();
       //console.log(requestUrl);
 
       requestXhttp(requestUrl, "GET", null, function(jsonString) {
         var json = JSON.parse(jsonString);
 
-        _inputJsonUrlEl.value = aTagEl.text;
+        _inputJsonUrlEl.value = requestUrl;
         editor.set(json);
         jsonEditorExpandAll(editor.getMode());
       });
@@ -86,8 +136,8 @@
 
     function deleteJsonButton(e) {
       var target      = e.target;
-      var aTagEl      = target.previousElementSibling;
-      var requestUrl  = aTagEl.text;
+      var $aTag      = $(target).parents("tr").find("a");
+      var requestUrl  = $aTag.text();
       //console.log(requestUrl);
 
       if (confirm(requestUrl + " 항목을 삭제하시겠습니까?")) {
@@ -99,8 +149,8 @@
 
     function addJsonButton(e) {
       var target      = e.target;
-      var inputTagEl  = target.previousElementSibling;
-      var requestUrl  = inputTagEl.value;
+      var $inputTag  = $("#input_json_url");
+      var requestUrl  = $inputTag.val();
       var jsonString  = editor.getText();
       // console.log(requestUrl);
 
