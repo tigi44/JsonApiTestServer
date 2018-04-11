@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,height=device-height">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+    button {
+      word-break: break-all;
+    }
+    </style>
+  </head>
+  <body style="background-color:red;">
+    <div style="text-align: center;"> <strong><%= title %></strong> </div>
+    </br></br>
+
+    <p>- a tag -</p>
+    <a href="/testWebView/3" >/testWebView/3</a></br>
+    <a href="/testWebView/3" target="_blank">새창 : /testWebView/3</a></br>
+    </br></br>
+
+    <p>- window.open, window.close -</p>
+    <button onclick="window.open('/testWebView/3', 'new');" style="width:200px;height:100px;">window.open(/testWebView3)</button>
+    <button onclick="window.open('http://www.payco.com', 'new');" style="width:200px;height:100px;">window.open(payco.com)</button>
+    <button onclick="window.close();" style="width:200px;height:100px;">window.close()</button>
+    </br></br>
+
+
+</html>
