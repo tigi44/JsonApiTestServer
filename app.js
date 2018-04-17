@@ -33,7 +33,6 @@ app.use(function(req, res, next) {
 });
 
 app.use('/', index);
-app.use('/scheme', scheme);
 app.use('/testWebView', testWebView);
 app.use('/*.json', jsonFile);
 
@@ -54,7 +53,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   var contentType = req.headers['content-type'];
-  
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

@@ -18,6 +18,10 @@ main.container > div.json-edit {
   left:55%;
 }
 
+main.container > div.scheme-edit {
+  height:40%;
+}
+
 #a-logo {
   width: 40px;
   height: 40px;
@@ -59,4 +63,18 @@ button.btn-validate {
   width:100%;
   word-wrap:break-word;
   margin-top:10px;
+}
+
+/* scheme */
+
+@media ( max-width: 1024px ) {
+  main.container {
+    margin-left: 0;
+  }
+  #div-list {
+    width: 100%;
+  }
+  #div-edit {
+    display: none;
+  }
 }

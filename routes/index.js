@@ -20,16 +20,44 @@ router.get('/', function(req, res, next) {
     hierarchyFiles    : hierarchyFiles(files)
   });
 });
-router.get('/uriencodedecode', function(req, res, next) {
-  res.render('uriencodedecode', {
-    title             : 'URI ENCODE / DECODE',
+
+router.get('/scheme', function(req, res, next) {
+  var filepath = "jsonScheme/scheme.json";
+
+  res.render('scheme', {
+    title             : 'SCHEME',
+    scheme            : getFileJson(filepath),
     headerMenu        : 1
   });
 });
+router.post('/scheme', function(req, res, next) {
+  var json = req.body;
+  var filepath = "jsonScheme/scheme.json";
+  var resultData = getFileJson(filepath);
+
+  var pathList = resultData[json.path];
+  if (!pathList) {
+    pathList = {};
+  }
+  pathList[json.name] = json;
+  resultData[json.path] = pathList;
+
+  fs.writeFileSync(filepath, JSON.stringify(resultData), 'utf8');
+
+  res.redirect(303, '/scheme');
+});
+
+router.get('/uriencodedecode', function(req, res, next) {
+  res.render('uriencodedecode', {
+    title             : 'URI ENCODE / DECODE',
+    headerMenu        : 2
+  });
+});
+
 router.get('/regex', function(req, res, next) {
   res.render('regex', {
     title             : 'REGULAR EXPRESSION',
-    headerMenu        : 2
+    headerMenu        : 3
   });
 });
 
@@ -77,6 +105,17 @@ function hierarchyFiles(files) {
     hierarchyFile[topFolderName].push(fileName);
   }
   return hierarchyFile;
+}
+
+function getFileJson(filepath) {
+  var fileString = fs.readFileSync(filepath, 'utf8');
+  var resultData;
+  try {
+    resultData = JSON.parse(fileString);
+  } catch(e) {
+    resultData = {};
+  }
+  return resultData;
 }
 
 module.exports = router;
