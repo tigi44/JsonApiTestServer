@@ -35,6 +35,14 @@ router.post('/scheme', function(req, res, next) {
   var filepath = "jsonScheme/scheme.json";
   var resultData = getFileJson(filepath);
 
+  if (json.path.length < 1 ||
+      json.name.length < 1 ||
+      json.scheme.length < 1) {
+      //throw new Error("All fields must be not empty");
+      res.json("All fields must be not empty");
+      return;
+  }
+
   var pathList = resultData[json.path];
   if (!pathList) {
     pathList = {};

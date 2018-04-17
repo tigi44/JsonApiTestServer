@@ -7,7 +7,6 @@ var bodyParser    = require('body-parser');
 
 var index         = require('./routes/index');
 var jsonFile      = require('./routes/jsonFile');
-var scheme        = require('./routes/scheme');
 var testWebView   = require('./routes/testWebView');
 
 var app           = express();
