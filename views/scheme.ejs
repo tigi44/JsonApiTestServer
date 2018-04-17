@@ -42,7 +42,7 @@
                         <tr>
                           <td>
                             <p style="margin:0;"><%= scheme[pathKey][nameKey].name %></p>
-                            <a href="<%= scheme[pathKey][nameKey].scheme %>" target="_blank"><%= scheme[pathKey][nameKey].scheme %></a>
+                            <a href="<%= scheme[pathKey][nameKey].uri %>" target="_blank"><%= scheme[pathKey][nameKey].uri %></a>
                           </td>
                         </tr>
                       <% }); %>
@@ -67,8 +67,8 @@
               <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="form-group">
-              <label for="scheme">scheme :</label>
-              <input type="text" class="form-control" id="scheme" name="scheme" required>
+              <label for="uri">URI :</label>
+              <input type="text" class="form-control" id="uri" name="uri" required>
             </div>
             <button type="submit">submit</button>
           </form>

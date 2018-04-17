@@ -25,7 +25,7 @@ router.get('/scheme', function(req, res, next) {
   var filepath = "jsonScheme/scheme.json";
 
   res.render('scheme', {
-    title             : 'SCHEME',
+    title             : 'WEB LINK TEST',
     scheme            : getFileJson(filepath),
     headerMenu        : 1
   });
@@ -37,7 +37,7 @@ router.post('/scheme', function(req, res, next) {
 
   if (json.path.length < 1 ||
       json.name.length < 1 ||
-      json.scheme.length < 1) {
+      json.uri.length < 1) {
       //throw new Error("All fields must be not empty");
       res.json("All fields must be not empty");
       return;
