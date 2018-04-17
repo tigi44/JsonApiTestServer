@@ -14,9 +14,22 @@ router.get('/.json', function(req, res, next) {
 router.get('/', function(req, res, next) {
   var files = findFiles('./jsonFile');
 
-  res.render('index', {
-    title       : 'JSON API TEST SERVER',
-    hierarchyFiles   : hierarchyFiles(files)
+  res.render('jsonapi', {
+    title             : 'JSON API TEST SERVER',
+    headerMenu        : 0,
+    hierarchyFiles    : hierarchyFiles(files)
+  });
+});
+router.get('/uriencodedecode', function(req, res, next) {
+  res.render('uriencodedecode', {
+    title             : 'URI ENCODE / DECODE',
+    headerMenu        : 1
+  });
+});
+router.get('/regex', function(req, res, next) {
+  res.render('regex', {
+    title             : 'REGULAR EXPRESSION',
+    headerMenu        : 2
   });
 });
 
