@@ -4,8 +4,11 @@ main.container {
 
 main.container > div.filepath {
   float: left;
-  margin-top: 10px;
   width: 60%;
+}
+
+main.container > div.div_first {
+  margin-top: 10px;
 }
 
 main.container > div.json-edit {

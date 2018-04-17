@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link href="/javascripts/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/styleIndex.css' />
+  </head>
+  <body>
+  <header>
+    <% include ./header.ejs %>
+  </header>
+
+  <main class="container" role="main">
+    <div class="form-group div_first">
+      <label for="textarea_uri">URI :</label>
+      <textarea id="textarea_uri" class="form-control" rows="5"></textarea>
+    </div>
+    <button onclick="encodeUri(event);" class="btn btn-dark btn-sm">Encode</button>
+    <button onclick="decodeUri(event);" class="btn btn-dark btn-sm">Decode</button>
+  </main>
+  </body>
+
+  <% include ./commonScript.ejs %>
+  <script src="/javascripts/uriencodedecode.js"></script>
+</html>
