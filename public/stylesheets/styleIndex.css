@@ -71,6 +71,9 @@ button.btn-validate {
   main.container {
     margin-left: 0;
   }
+  #a-brand-title {
+    display: none;
+  }
   #div-list {
     width: 100%;
   }
