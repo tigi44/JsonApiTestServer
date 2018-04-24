@@ -43,13 +43,11 @@ $ NODE_ENV=production npm start
 ```
 
 ## RESTful API
-- GET : application/json, postfix '.json'
-- DELETE : application/json, postfix '.json'
-- POST : application/json, postfix '.json', BODY - raw data
+- GET : Content-Type -> application/json
+- DELETE : Content-Type -> application/json
+- POST(add, update) : Content-Type -> application/json, BODY - raw data
 ![Image](./public/readmeImage/example_post_body.png)
-- The postfix of url must be '.json' for using a json file
-- If use postfix '.json', 'Content-Type' of the response header will be set to 'application/json'
-
+- if you add postfix '.json' to api url, the 'Content-Type' will be changed to 'application/json'
 
 ## #set env....
 ```

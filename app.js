@@ -22,26 +22,12 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// set response header
-app.use(function(req, res, next) {
-  if (path.extname(req.path) == '.json') {
-    res.setHeader('Content-Type', 'application/json');
-  }
-  next();
-});
-
 app.use('/', index);
-app.use('/*.json', jsonFile);
+app.use('/*', jsonFile);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var errorMessage = 'Not Found';
-  var contentType = req.headers['content-type'];
-
-  if (contentType == 'application/json' && path.extname(req.path) != '.json') {
-    errorMessage += ' : the postfix of url must be \'.json\' for using a json file';
-  }
-
   var err = new Error(errorMessage);
   err.status = 404;
   next(err);
@@ -50,7 +36,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   var contentType = req.headers['content-type'];
-  console.log(contentType);
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
