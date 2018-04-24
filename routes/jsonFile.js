@@ -15,9 +15,7 @@ router.get('/', function(req, res, next) {
     resultData = JSON.parse(fileString);
   } catch(e) {
     // console.log(e);
-    // filepath로 해당 파일이 없는 경우 404에러
-    resultData = 'Not Found';
-    res.status(404);
+    next();
   }
   res.json(resultData);
 });
@@ -32,8 +30,10 @@ router.delete('/', function(req, res, next) {
     resultData = 'Success Delete';
   } catch(e) {
     // console.log(e);
-    resultData = 'Fail Delete';
-    res.status(500);
+    var errorMessage = 'Fail Delete';
+    var err = new Error(errorMessage);
+    err.status = 500;
+    next(err);
   }
   res.json(resultData);
 });
@@ -50,14 +50,36 @@ router.post('/', function(req, res, next) {
     resultData = json;
   } catch(e) {
     // console.log(e);
-    resultData = 'Fail Post';
-    res.status(500);
+    var errorMessage = 'Fail Post';
+    var err = new Error(errorMessage);
+    err.status = 500;
+    next(err);
   }
   res.json(resultData);
 });
 
+function addExtNameJson(urlPath) {
+  var resultPath;
+  var extJson = '.json';
+  var extname = path.extname(urlPath);
+
+  if (extname) {
+    if (extname == extJson) {
+      resultPath = urlPath;
+    } else {
+      resultPath = urlPath.replace(extname, extJson);
+    }
+  } else {
+    resultPath = urlPath + extJson;
+  }
+
+  return resultPath;
+}
+
 function getFilePathByRequest(req) {
   var urlPath = url.parse(req.originalUrl).pathname;
+  urlPath     = addExtNameJson(urlPath);
+
   return path.join('./jsonFile', urlPath.toLowerCase());
 }
 

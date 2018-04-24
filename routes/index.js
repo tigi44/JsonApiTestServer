@@ -2,9 +2,10 @@ var express = require('express');
 var router  = express.Router();
 var fs      = require('fs');
 var path    = require('path');
+var extJson = '.json';
 
 /* GET json path list */
-router.get('/.json', function(req, res, next) {
+router.get('/' + extJson, function(req, res, next) {
   var files = findFiles('./jsonFile');
 
   res.json(hierarchyFiles(files));
@@ -12,13 +13,18 @@ router.get('/.json', function(req, res, next) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  var contentType = req.headers['content-type'];
   var files = findFiles('./jsonFile');
 
-  res.render('jsonapi', {
-    title             : 'JSON API TEST SERVER',
-    headerMenu        : 0,
-    hierarchyFiles    : hierarchyFiles(files)
-  });
+  if (contentType == 'application/json') {
+    res.json(hierarchyFiles(files));
+  } else {
+    res.render('jsonapi', {
+      title             : 'JSON API TEST SERVER',
+      headerMenu        : 0,
+      hierarchyFiles    : hierarchyFiles(files)
+    });
+  }
 });
 
 router.get('/scheme', function(req, res, next) {
@@ -84,7 +90,7 @@ function findFiles(startPath) {
         fileNames = fileNames.concat(findFiles(filename));
       } else {
         filename = filename.replace('jsonFile', '');
-        if (path.extname(filename) == '.json') {
+        if (path.extname(filename) == extJson) {
           fileNames.push(filename);
         }
       }
@@ -110,7 +116,7 @@ function hierarchyFiles(files) {
       hierarchyFile[topFolderName] = [];
     }
 
-    hierarchyFile[topFolderName].push(fileName);
+    hierarchyFile[topFolderName].push(fileName.replace(extJson, ''));
   }
   return hierarchyFile;
 }

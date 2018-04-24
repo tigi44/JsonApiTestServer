@@ -32,3 +32,6 @@ npm-debug.log
 # api result json file
 jsonFile/*
 !jsonFile/test.json
+
+# web link scheme file
+jsonScheme/*
