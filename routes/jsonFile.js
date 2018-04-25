@@ -3,30 +3,42 @@ var router  = express.Router();
 var fs      = require('fs');
 var path    = require('path');
 var url     = require('url');
+var ff      = require('../routes/findFile');
 
 // get
 router.get('/', function(req, res, next) {
   var resultData;
-  var filepath = getFilePathByRequest(req);
+  var reqPath  = getFilePathByRequest(req);
+  var filePath = addExtNameJson(reqPath);
 
   try {
-    // filepath로 해당 파일을 찾은 경우 json으로 출력
-    var fileString = fs.readFileSync(filepath, 'utf8');
-    resultData = JSON.parse(fileString);
+    if (fs.existsSync(reqPath) && fs.lstatSync(reqPath).isDirectory()) {
+      resultData = ff.hierarchyFiles(ff.findFiles(reqPath));
+    } else if (fs.existsSync(filePath) && fs.lstatSync(filePath).isFile()) {
+      var fileString = fs.readFileSync(filePath, 'utf8');
+      resultData = JSON.parse(fileString);
+    } else {
+      next();
+    }
   } catch(e) {
     // console.log(e);
-    next();
+    var errorMessage = 'Fail Get';
+    var err = new Error(errorMessage);
+    err.status = 500;
+    next(err);
   }
+
   res.json(resultData);
 });
 
 // delete
 router.delete('/', function(req, res, next) {
   var resultData;
-  var filepath = getFilePathByRequest(req);
+  var filePath = getFilePathByRequest(req);
+      filePath = addExtNameJson(filePath);
 
   try {
-    fs.unlinkSync(filepath);
+    fs.unlinkSync(filePath);
     resultData = 'Success Delete';
   } catch(e) {
     // console.log(e);
@@ -42,11 +54,12 @@ router.delete('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   var resultData;
   var json = req.body;
-  var filepath = getFilePathByRequest(req);
+  var filePath = getFilePathByRequest(req);
+      filePath = addExtNameJson(filePath);
 
   try {
-    mkdirp(filepath);
-    fs.writeFileSync(filepath, JSON.stringify(json), 'utf8');
+    mkdirp(filePath);
+    fs.writeFileSync(filePath, JSON.stringify(json), 'utf8');
     resultData = json;
   } catch(e) {
     // console.log(e);
@@ -60,17 +73,16 @@ router.post('/', function(req, res, next) {
 
 function addExtNameJson(urlPath) {
   var resultPath;
-  var extJson = '.json';
   var extname = path.extname(urlPath);
 
   if (extname) {
-    if (extname == extJson) {
+    if (extname == ff.extJson) {
       resultPath = urlPath;
     } else {
-      resultPath = urlPath.replace(extname, extJson);
+      resultPath = urlPath.replace(extname, ff.extJson);
     }
   } else {
-    resultPath = urlPath + extJson;
+    resultPath = urlPath + ff.extJson;
   }
 
   return resultPath;
@@ -78,13 +90,12 @@ function addExtNameJson(urlPath) {
 
 function getFilePathByRequest(req) {
   var urlPath = url.parse(req.originalUrl).pathname;
-  urlPath     = addExtNameJson(urlPath);
 
   return path.join('./jsonFile', urlPath.toLowerCase());
 }
 
-function mkdirp(filepath) {
-  var dirname = path.dirname(filepath);
+function mkdirp(filePath) {
+  var dirname = path.dirname(filePath);
   if (fs.existsSync(dirname)) {
     return true;
   }
