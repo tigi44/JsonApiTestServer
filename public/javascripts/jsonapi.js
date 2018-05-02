@@ -57,7 +57,7 @@ function addJsonButton(e) {
   var jsonString  = editor.getText();
   // console.log(requestUrl);
 
-  requestXhttp(requestUrl, "POST", jsonString,
+  requestXhttp(requestUrl, "PUT", jsonString,
   function(data) {
     location.reload();
   },

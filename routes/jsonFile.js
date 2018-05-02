@@ -31,6 +31,53 @@ router.get('/', function(req, res, next) {
   res.json(resultData);
 });
 
+// post
+router.post('/', function(req, res, next) {
+  var resultData;
+  var json = req.body;
+  var filePath = getFilePathByRequest(req);
+      filePath = addExtNameJson(filePath);
+
+  try {
+    if (fs.existsSync(filePath) && fs.lstatSync(filePath).isFile()) {
+      var fileString = fs.readFileSync(filePath, 'utf8');
+      resultData = JSON.parse(fileString);
+    } else {
+      mkdirp(filePath);
+      fs.writeFileSync(filePath, JSON.stringify(json), 'utf8');
+      resultData = json;
+    }
+  } catch(e) {
+    // console.log(e);
+    var errorMessage = 'Fail Post';
+    var err = new Error(errorMessage);
+    err.status = 500;
+    next(err);
+  }
+  res.json(resultData);
+});
+
+// put
+router.put('/', function(req, res, next) {
+  var resultData;
+  var json = req.body;
+  var filePath = getFilePathByRequest(req);
+      filePath = addExtNameJson(filePath);
+
+  try {
+    mkdirp(filePath);
+    fs.writeFileSync(filePath, JSON.stringify(json), 'utf8');
+    resultData = json;
+  } catch(e) {
+    // console.log(e);
+    var errorMessage = 'Fail Put';
+    var err = new Error(errorMessage);
+    err.status = 500;
+    next(err);
+  }
+  res.json(resultData);
+});
+
 // delete
 router.delete('/', function(req, res, next) {
   var resultData;
@@ -43,27 +90,6 @@ router.delete('/', function(req, res, next) {
   } catch(e) {
     // console.log(e);
     var errorMessage = 'Fail Delete';
-    var err = new Error(errorMessage);
-    err.status = 500;
-    next(err);
-  }
-  res.json(resultData);
-});
-
-// post
-router.post('/', function(req, res, next) {
-  var resultData;
-  var json = req.body;
-  var filePath = getFilePathByRequest(req);
-      filePath = addExtNameJson(filePath);
-
-  try {
-    mkdirp(filePath);
-    fs.writeFileSync(filePath, JSON.stringify(json), 'utf8');
-    resultData = json;
-  } catch(e) {
-    // console.log(e);
-    var errorMessage = 'Fail Post';
     var err = new Error(errorMessage);
     err.status = 500;
     next(err);

@@ -43,9 +43,10 @@ $ NODE_ENV=production npm start
 ```
 
 ## RESTful API
-- GET : Content-Type -> application/json
-- DELETE : Content-Type -> application/json
-- POST(add, update) : Content-Type -> application/json, BODY - raw data
+- GET : Read (Content-Type -> application/json)
+- DELETE : Delete (Content-Type -> application/json)
+- POST : Create , Read (Content-Type -> application/json, BODY - raw data)
+- PUT : Create , Update (Content-Type -> application/json, BODY - raw data)
 ![Image](./public/readmeImage/example_post_body.png)
 - if you add postfix '.json' to api url, the 'Content-Type' will be changed to 'application/json'
 
