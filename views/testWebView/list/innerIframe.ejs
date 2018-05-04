@@ -1,0 +1,33 @@
+<html><head><script>
+</script>
+
+
+		<meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		<script type="text/javascript">
+		    function openKMCISWindow(){
+          console.log("openKMCISWindow");
+		        document.reqKMCISForm.submit();
+		    }
+		</script>
+	</head>
+
+	<body onload="openKMCISWindow();">
+    <a href="javascript:document.reqKMCISForm.submit();" target="_blank">submit form</a>
+  </br>
+
+    <a href="javascript:window.open('http://www.payco.com');" target="_blank">window.open</a>
+  </br>
+    <a href="javascript:window.location.href='http://www.payco.com';" target="_blank">window.location</a>
+  </br>
+    <a href="javascript:window.parent.location.href='http://www.payco.com';" target="_blank">window.parent.location</a>
+    </br>
+    <a href="javascript:window.parent.opener.location.href='http://www.payco.com';" target="_blank">window.parent.opener.location</a>
+    </br>
+
+</br>
+</br>
+    <form name="reqKMCISForm" method="post" action="http://www.payco.com" target="_blank">
+      <button type="submit">submit form</button>
+		</form>
+</body></html>

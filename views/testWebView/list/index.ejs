@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,height=device-height">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+    button {
+      word-break: break-all;
+    }
+    </style>
+  </head>
+  <body style="background-color:gray;">
+    <div style="text-align: center;"> <strong><%= title %></strong> </div>
+    </br></br>
+
+    <a href="/testWebView/list/iframe" >test iframe</a></br></br>
+    <a href="/testWebView/list/formPostWithTarget" >test form post(target="_blank")</a></br></br>
+    <a href="/testWebView/list/formPostNoTarget" >test form post(no target)</a></br></br>
+    <a href="javascript:window.open('/testWebView/list/newWindowScript');" >test new open window(script : window.opener)</a></br></br>
+    <a href="javascript:window.open('/testWebView/list/iframe');" >test new open iframe(script : window.parent.opener)</a></br></br>
+
+</html>
