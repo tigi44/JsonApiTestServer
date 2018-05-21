@@ -29,10 +29,10 @@ module.exports = {
     var hierarchyFile = {};
     for (var key in files) {
       var fileName = files[key];
-      var topFolderName = fileName.match(/\/.*\//gi);
+      var topFolderName = fileName.match(/\/([^\/]*)\//gi);
 
       if (topFolderName) {
-        topFolderName = topFolderName.toString();
+        topFolderName = topFolderName[0].toString();
         topFolderName = topFolderName.replace(/^\//, "");
         topFolderName = topFolderName.replace(/\/$/, "");
       } else {
