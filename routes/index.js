@@ -12,8 +12,9 @@ router.get('/' + ff.extJson, function(req, res, next) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  var search = req.query.search;
   var contentType = req.headers['content-type'];
-  var files = ff.findFiles('./jsonFile');
+  var files = ff.findFiles('./jsonFile', search);
 
   if (contentType == 'application/json') {
     res.json(ff.hierarchyFiles(files));
@@ -21,18 +22,21 @@ router.get('/', function(req, res, next) {
     res.render('jsonapi', {
       title             : 'JSON API TEST SERVER',
       headerMenu        : 0,
-      hierarchyFiles    : ff.hierarchyFiles(files)
+      hierarchyFiles    : ff.hierarchyFiles(files),
+      search            : search
     });
   }
 });
 
 router.get('/scheme', function(req, res, next) {
+  var search = req.query.search;
   var filePath = "jsonScheme/scheme.json";
 
   res.render('scheme', {
     title             : 'WEB LINK TEST',
-    scheme            : ff.getFileJson(filePath),
-    headerMenu        : 1
+    scheme            : ff.getFileJson(filePath, search),
+    headerMenu        : 1,
+    search            : search
   });
 });
 router.post('/scheme', function(req, res, next) {

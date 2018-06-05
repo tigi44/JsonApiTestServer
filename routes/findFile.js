@@ -3,7 +3,8 @@ var path    = require('path');
 
 module.exports = {
   extJson : '.json',
-  findFiles: function (startPath) {
+  findFiles: function (startPath, search) {
+    search = (search) ? search : "";
     if (!fs.existsSync(startPath)){
         console.log("No file dir ", startPath);
         return;
@@ -15,11 +16,13 @@ module.exports = {
         var filename = path.join(startPath, files[i]);
         var stat = fs.lstatSync(filename);
         if (stat.isDirectory()) {
-          fileNames = fileNames.concat(this.findFiles(filename));
+          fileNames = fileNames.concat(this.findFiles(filename, search));
         } else {
           filename = filename.replace('jsonFile', '');
           if (path.extname(filename) == this.extJson) {
-            fileNames.push(filename);
+            if (filename.includes(search)) {
+              fileNames.push(filename);
+            }
           }
         }
     }
@@ -47,7 +50,7 @@ module.exports = {
     }
     return hierarchyFile;
   },
-  getFileJson: function (filePath) {
+  getFileJson: function (filePath, search) {
     var fileString = fs.readFileSync(filePath, 'utf8');
     var resultData;
     try {
@@ -55,6 +58,30 @@ module.exports = {
     } catch(e) {
       resultData = {};
     }
-    return resultData;
+
+    return this.searchSchemeJson(resultData, search);
+  },
+  searchSchemeJson: function (obj, search) {
+    if (!search) {
+      return obj;
+    }
+
+    var resultJson = {};
+    for (var k in obj) {
+      if (typeof obj[k] == 'object') {
+        var searchJson = this.searchSchemeJson(obj[k], search);
+        if (Object.keys(searchJson).length > 0) {
+          resultJson[k] = searchJson;
+        }
+      } else if (typeof obj[k] == 'string') {
+        if (obj[k].includes(search)) {
+          resultJson = obj;
+          break;
+        }
+      } else {
+        continue;
+      }
+    }
+    return resultJson;
   }
 };
