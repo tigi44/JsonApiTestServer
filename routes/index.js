@@ -56,7 +56,11 @@ router.post('/scheme', function(req, res, next) {
   if (!pathList) {
     pathList = {};
   }
-  pathList[json.name] = json;
+  if (json.delete) {
+    pathList[json.name] = undefined;
+  } else {
+    pathList[json.name] = json;
+  }
   resultData[json.path] = pathList;
 
   fs.writeFileSync(filePath, JSON.stringify(resultData), 'utf8');
