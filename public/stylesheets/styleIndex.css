@@ -80,4 +80,7 @@ button.btn-validate {
   #div-edit {
     display: none;
   }
+  .mobile-display-none {
+    display: none;
+  }
 }
