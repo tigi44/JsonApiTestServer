@@ -47,7 +47,7 @@
                                 <input type="hidden" name="path" value="<%= pathKey %>">
                                 <input type="hidden" name="name" value="<%= scheme[pathKey][nameKey].name %>">
                                 <input type="hidden" name="uri" value="<%= scheme[pathKey][nameKey].uri %>">
-                              <button type="submit" class="btn btn-danger btn-sm" style="float: right; padding: 5px 10px; margin: 5px 0px 5px 10px;">Delete</button>
+                              <button type="submit" onclick="deleteButton(event);" class="btn btn-danger btn-sm" style="float: right; padding: 5px 10px; margin: 5px 0px 5px 10px;">Delete</button>
                             </form>
                             <button onclick="editButton(event, '<%= pathKey %>', '<%= scheme[pathKey][nameKey].name %>', '<%= scheme[pathKey][nameKey].uri %>');" class="btn btn-dark btn-sm mobile-display-none" style="float: right; padding: 5px 10px; margin: 5px 0;">Edit</button>
                             <span style="margin:0;"><%= scheme[pathKey][nameKey].name %></span><br>
