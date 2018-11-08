@@ -33,7 +33,7 @@ router.get('/scheme', function(req, res, next) {
   var filePath = "jsonScheme/scheme.json";
 
   res.render('scheme', {
-    title             : 'WEB LINK TEST',
+    title             : 'SCHEME TEST',
     scheme            : ff.getFileJson(filePath, search),
     headerMenu        : 1,
     search            : search
