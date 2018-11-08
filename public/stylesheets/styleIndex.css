@@ -84,3 +84,25 @@ button.btn-validate {
     display: none;
   }
 }
+
+@media ( max-width: 526px ) {
+  .mobile-header-div>form {
+    position: absolute;
+    top: 55px;
+    left: 0px;
+    margin: 0!important;
+    width: 100%;
+  }
+
+  main.container > div.div_first {
+    margin-top: 40px;
+  }
+
+  main.container > div.json-edit {
+    width:40%;
+    height:90%;
+    position:fixed;
+    left:55%;
+    margin-top: 50px;
+  }
+}
