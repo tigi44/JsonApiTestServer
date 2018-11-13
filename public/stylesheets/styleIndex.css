@@ -5,6 +5,11 @@ main.container {
 main.container > div.filepath {
   float: left;
   width: 60%;
+  margin-bottom: 100px;
+}
+
+main.container > div.scheme-edit {
+  height:40%;
 }
 
 main.container > div.div_first {
@@ -16,10 +21,6 @@ main.container > div.json-edit {
   height:90%;
   position:fixed;
   left:55%;
-}
-
-main.container > div.scheme-edit {
-  height:40%;
 }
 
 #a-logo {
