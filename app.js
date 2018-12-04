@@ -11,6 +11,21 @@ var testWebView   = require('./routes/testWebView');
 
 var app           = express();
 
+// elastic-apm-node agent code
+var apm = require('elastic-apm-node').start({
+  // Override service name from package.json
+  // Allowed characters: a-z, A-Z, 0-9, -, _,
+  // and space
+  serviceName: 'JsonApiTestServer',
+
+  // Use if APM Server requires a token
+  secretToken: '',
+
+  // Set custom APM Server URL
+  // Default: http://localhost:8200
+  serverUrl: ''
+})
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
