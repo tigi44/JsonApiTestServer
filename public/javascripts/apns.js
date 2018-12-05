@@ -2,13 +2,45 @@ function editButton(e) {
   var target   = e.target;
   var $form    = $(target).prev();
   var $divEdit = $("#div-edit2");
+  var path     = $form.find("[name=path]").val();
 
-  $divEdit.find("#path").val($form.find("[name=path]").val());
-  $divEdit.find("#token").val($form.find("[name=token]").val());
-  $divEdit.find("#title").val($form.find("[name=title]").val());
-  $divEdit.find("#body").val($form.find("[name=body]").val());
-  $divEdit.find("#sound").val($form.find("[name=sound]").val());
-  $divEdit.find("#badge").val($form.find("[name=badge]").val());
+  requestXhttp("/apns?path=" + path, "GET", null, function(jsonString) {
+    var json = JSON.parse(jsonString);
+
+    $divEdit.find("#path").val(path);
+    $divEdit.find("#token").val(json.token);
+    editor.set(json.aps);
+    jsonEditorExpandAll(editor.getMode());
+  });
+}
+
+function saveButton(e) {
+  e.preventDefault();
+  var target = e.target;
+  var $form = $(target).parents("form");
+  var path = $form.find("[name=path]").val();
+  var token = $form.find("[name=token]").val();
+
+  try {
+    var aps = editor.get();
+    var json = {
+      path : path,
+      token : token,
+      aps : aps
+    };
+
+    requestXhttp("/apns", "POST", JSON.stringify(json),
+    function(data) {
+      location.reload();
+    },
+    function(error) {
+      alert(error);
+    });
+
+    successValidateResult();
+  } catch (error) {
+    errorValidateResult(error);
+  }
 }
 
 function deleteButton(e) {
@@ -18,52 +50,43 @@ function deleteButton(e) {
   var path = $form.find("input[name=path]").val();
 
   if (confirm(path + " 항목을 삭제하시겠습니까?")) {
-    $(target).parents("form").submit();
+    var json = {
+      path : path
+    }
+    requestXhttp("/apns", "DELETE", JSON.stringify(json),
+    function(data) {
+      location.reload();
+    },
+    function(error) {
+      alert(error);
+    });
   }
 }
 
 function sendPush(e) {
   var target   = e.target;
   var $form    = $(target).parents();
-  var jsonString = JSON.stringify(getFormData($form));
+  var path = $form.find("[name=path]").val();
+  var token = $form.find("[name=token]").val();
 
-  requestXhttp("/apns/sendpush", "POST", jsonString,
-  function(data) {
-    alert(data);
-  },
-  function(error) {
-    alert(error);
-  });
-}
+  try {
+    var aps = editor.get();
+    var json = {
+      path : path,
+      token : token,
+      aps : aps
+    };
 
-function getFormData($form){
-    var unindexed_array = $form.serializeArray();
-    var indexed_array = {};
-
-    $.map(unindexed_array, function(n, i){
-        indexed_array[n['name']] = n['value'];
+    requestXhttp("/apns/sendpush", "POST", JSON.stringify(json),
+    function(data) {
+      alert(data);
+    },
+    function(error) {
+      alert(error);
     });
 
-    return indexed_array;
-}
-
-function requestXhttp(url, method, data, successCallback, errorCallback) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      if (successCallback) {
-        successCallback(this.responseText);
-      }
-    } else if (this.readyState == 4 && this.status != 200) {
-      if (errorCallback) {
-        errorCallback(this.responseText);
-      } else {
-        // console.log(this);
-        alert("Server Error : " + this.responseText);
-      }
-    }
-  };
-  xhttp.open(method, url, true);
-  xhttp.setRequestHeader("Content-type", "application/json");
-  xhttp.send(data);
+    successValidateResult();
+  } catch (error) {
+    errorValidateResult(error);
+  }
 }

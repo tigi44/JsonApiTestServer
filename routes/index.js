@@ -71,14 +71,20 @@ router.post('/scheme', function(req, res, next) {
 
 router.get('/apns', function(req, res, next) {
   var search = req.query.search;
+  var path   = req.query.path;
   var filePath = "jsonApns/apns.json";
 
-  res.render('apns', {
-    title             : 'APNS TEST',
-    apns              : ff.getFileJson(filePath, search),
-    headerMenu        : 2,
-    search            : search
-  });
+  if (path) {
+    var resultData = ff.getFileJson(filePath);
+    res.json(resultData[path]);
+  } else {
+    res.render('apns', {
+      title             : 'APNS TEST',
+      apns              : ff.getFileJson(filePath, search),
+      headerMenu        : 2,
+      search            : search
+    });
+  }
 });
 router.post('/apns', function(req, res, next) {
   var json = req.body;
@@ -86,49 +92,49 @@ router.post('/apns', function(req, res, next) {
   var resultData = ff.getFileJson(filePath);
   var apnsJson = {};
 
-
   if (json.path.length < 1 ||
-      json.token.length < 1) {
+      (json.token.length < 1)) {
       //throw new Error("A path and token must be not empty");
+      res.status(500);
       res.json("A path and token must be not empty");
       return;
   }
 
   apnsJson = {
     token : json.token,
-    aps : {
-      alert : {
-        title : json.title,
-        body : json.body
-      },
-      sound : json.sound,
-      badge : json.badge
-    }
+    aps : json.aps
   };
 
-  if (json.delete) {
-    delete resultData[json.path];
-  } else {
-    resultData[json.path] = apnsJson;
-  }
+  resultData[json.path] = apnsJson;
 
   fs.writeFileSync(filePath, JSON.stringify(resultData), 'utf8');
 
-  res.redirect(303, '/apns');
+  res.json("ok");
+});
+router.delete('/apns', function(req, res, next) {
+  var json = req.body;
+  var filePath = "jsonApns/apns.json";
+  var resultData = ff.getFileJson(filePath);
+  var apnsJson = {};
+
+  if (json.path.length < 1) {
+      //throw new Error("A path and token must be not empty");
+      res.status(500);
+      res.json("A path must be not empty");
+      return;
+  }
+
+  delete resultData[json.path];
+
+  fs.writeFileSync(filePath, JSON.stringify(resultData), 'utf8');
+
+  res.json("ok");
 });
 router.post('/apns/sendpush', function(req, res, next) {
   var json = req.body;
-
+  console.log(JSON.stringify(json));
   if (json.token) {
-    apn.push(json.token, {
-        "alert" : {
-            "title" : json.title,
-            "body" : json.body
-        },
-        "sound" : json.sound,
-        "badge" : json.badge
-    });
-
+    apn.push(json.token, json.aps);
     res.json("푸쉬 전송 완료!!");
   } else {
     res.json("토큰값은 필수입니다.");

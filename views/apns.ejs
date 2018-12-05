@@ -37,16 +37,10 @@
                         <tr>
                           <td>
                             <form method="POST" class="">
-                                <input type="hidden" name="delete" value="true">
                                 <input type="hidden" name="path" value="<%= pathKey %>">
-                                <input type="hidden" name="token" value="<%= apns[pathKey].token %>">
-                                <input type="hidden" name="title" value="<%= apns[pathKey].aps.alert.title %>">
-                                <input type="hidden" name="body" value="<%= apns[pathKey].aps.alert.body %>">
-                                <input type="hidden" name="sound" value="<%= apns[pathKey].aps.sound %>">
-                                <input type="hidden" name="badge" value="<%= apns[pathKey].aps.badge %>">
                                 <button type="submit" onclick="deleteButton(event);" class="btn btn-danger btn-sm" style="float: right; padding: 5px 10px; margin: 5px 0px 5px 10px;">Delete</button>
                             </form>
-                            <button onclick="editButton(event);" class="btn btn-dark btn-sm" style="float: right; padding: 5px 10px; margin: 5px 0;">Edit</button>
+                            <button onclick="editButton(event);" class="btn btn-dark btn-sm" style="float: right; padding: 5px 10px; margin: 5px 0;">Show</button>
                             <div style="padding-right: 10px; overflow: hidden; word-break: break-all;">TOKEN : <%= apns[pathKey].token %></div>
                           </td>
                         </tr>
@@ -69,29 +63,20 @@
               <label for="token">token :</label>
               <input type="text" class="form-control" id="token" name="token" required>
             </div>
-            <div class="form-group">
-              <label for="title">title :</label>
-              <input type="text" class="form-control" id="title" name="title" required>
-            </div>
-            <div class="form-group">
-              <label for="body">body :</label>
-              <input type="text" class="form-control" id="body" name="body" required>
-            </div>
-            <div class="form-group">
-              <label for="sound">sound :</label>
-              <input type="text" class="form-control" id="sound" name="sound" required>
-            </div>
-            <div class="form-group">
-              <label for="badge">badge :</label>
-              <input type="text" class="form-control" id="badge" name="badge" required>
-            </div>
-            <button type="submit">SAVE</button>
-            <button onclick="sendPush(event);" type="button" class="btn-success" style="float: right;">SEND PUSH</button>
+            <div id="jsoneditor"></div>
+
+            <div id="span_validate_result"></div>
+            <br>
+            <button onclick="validateJsonButton(event);" type="button" class="btn btn-dark">Validate</button>
+            <button onclick="saveButton(event);" type="button" class="btn btn-secondary">SAVE</button>
+            <button onclick="sendPush(event);" type="button" class="btn btn-success" style="float: right;">SEND PUSH</button>
           </form>
         </div>
     </main>
     </body>
 
     <% include ./commonScript.ejs %>
+    <script src="/javascripts/jsoneditor/dist/jsoneditor.min.js"></script>
+    <script src="/javascripts/jsonapi.js"></script>
     <script src="/javascripts/apns.js"></script>
 </html>
