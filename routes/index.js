@@ -101,6 +101,7 @@ router.post('/apns', function(req, res, next) {
   }
 
   apnsJson = {
+    path : json.path,
     token : json.token,
     aps : json.aps
   };
@@ -132,7 +133,7 @@ router.delete('/apns', function(req, res, next) {
 });
 router.post('/apns/sendpush', function(req, res, next) {
   var json = req.body;
-  console.log(JSON.stringify(json));
+
   if (json.token) {
     apn.push(json.token, json.aps);
     res.json("푸쉬 전송 완료!!");
