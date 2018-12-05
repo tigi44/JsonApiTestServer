@@ -1,21 +1,29 @@
 var apn = require('apn');
 
+var sanbaxGateway = 'gateway.sandbox.push.apple.com';
+var gateway = 'gateway.push.apple.com';
+
 module.exports = {
   options : {
-    gateway : "gateway.sandbox.push.apple.com",
+    gateway : sanbaxGateway,
     cert: './apns/keys/cert.pem',
     key: './apns/keys/key.pem'
   },
-  push : function(token, noteJson) {
+  push : function(production, token, noteJson) {
     if (!token || noteJson == null) {
       return;
     }
 
-    var apnConnection = new apn.Connection(this.options);
+    var options = this.options;
+
+    options.gateway = production ? gateway : sanbaxGateway;
+
+    var apnConnection = new apn.Connection(options);
     var myDevice = new apn.Device(token);
     var note = new apn.Notification();
 
     console.log("=== Start APNs Push ====");
+    console.log("gateway : " + options.gateway);
     console.log("token : " + token);
     console.log("noteJson : " + JSON.stringify(noteJson));
 

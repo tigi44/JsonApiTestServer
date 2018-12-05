@@ -9,6 +9,7 @@ function editButton(e) {
 
     $divEdit.find("#path").val(path);
     $divEdit.find("#token").val(json.token);
+    $divEdit.find("input[name=production]").eq(json.production).prop("checked", true);
     editor.set(json.aps);
     jsonEditorExpandAll(editor.getMode());
   });
@@ -20,12 +21,14 @@ function saveButton(e) {
   var $form = $(target).parents("form");
   var path = $form.find("[name=path]").val();
   var token = $form.find("[name=token]").val();
+  var production = $form.find("[name=production]:checked").val();
 
   try {
     var aps = editor.get();
     var json = {
       path : path,
       token : token,
+      production : Number(production),
       aps : aps
     };
 
@@ -68,12 +71,14 @@ function sendPush(e) {
   var $form    = $(target).parents();
   var path = $form.find("[name=path]").val();
   var token = $form.find("[name=token]").val();
+  var production = $form.find("[name=production]:checked").val();
 
   try {
     var aps = editor.get();
     var json = {
       path : path,
       token : token,
+      production : Number(production),
       aps : aps
     };
 
