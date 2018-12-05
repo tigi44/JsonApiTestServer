@@ -35,3 +35,7 @@ jsonFile/*
 
 # web link scheme file
 jsonScheme/*
+
+# apns .pem
+apns/keys/cert.pem
+apns/keys/key.pem

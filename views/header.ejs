@@ -14,16 +14,19 @@
             <a class="nav-link" href="/scheme">Scheme</a>
           </li>
           <li class="nav-item <% if(headerMenu == 2){ %> active <% } %>">
+            <a class="nav-link" href="/apns">APNs</a>
+          </li>
+          <li class="nav-item <% if(headerMenu == 3){ %> active <% } %>">
             <a class="nav-link" href="/uriencodedecode">URI en/de</a>
           </li>
-          <!-- <li class="nav-item <% if(headerMenu == 3){ %> active <% } %>">
+          <!-- <li class="nav-item <% if(headerMenu == 4){ %> active <% } %>">
             <a class="nav-link" href="/regex">RegEx</a>
           </li> -->
           <li class="nav-item mobile-display-none">
             <a class="nav-link" href="https://regexr.com" target="_blank" style="color:#80c0f0;">RegExr</a>
           </li>
         </ul>
-        <% if(headerMenu == 0 || headerMenu == 1) { %>
+        <% if(headerMenu == 0 || headerMenu == 1 || headerMenu == 2) { %>
         <form class="form-inline my-2 my-md-0 ml-4" action="">
           <div class="input-group">
             <input type="text" class="form-control" name="search" placeholder="SEARCH" aria-label="SEARCH" value="<%= search %>">
