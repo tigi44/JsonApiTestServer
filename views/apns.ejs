@@ -41,7 +41,7 @@
                                 <button type="submit" onclick="deleteButton(event);" class="btn btn-danger btn-sm" style="float: right; padding: 5px 10px; margin: 5px 0px 5px 10px;">Delete</button>
                             </form>
                             <button onclick="editButton(event);" class="btn btn-dark btn-sm" style="float: right; padding: 5px 10px; margin: 5px 0;">Show</button>
-                            <div style="padding-right: 10px; overflow: hidden; word-break: break-all;">TOKEN : <%= apns[pathKey].token %></div>
+                            <div style="padding-right: 10px; overflow: hidden; word-break: break-all;">토큰 : <%= apns[pathKey].token %></div>
                           </td>
                         </tr>
                   </tbody>
@@ -60,17 +60,19 @@
               <input type="text" class="form-control" id="path" name="path" required>
             </div>
             <div class="form-group">
-              <label for="token">token :</label>
+              <label for="token">토큰 :</label>
               <input type="text" class="form-control" id="token" name="token" required>
             </div>
 
             <input type="radio" name="production" value="0" checked> 로컬빌드(sandbox) <input type="radio" name="production" value="1" style="margin-left: 10px;"> 알파빌드
 
-            <div id="jsoneditor"></div>
+            <div id="jsoneditor" style="height: 300px;"></div>
 
-            <div id="span_validate_result"></div>
-            <br>
-            <button onclick="validateJsonButton(event);" type="button" class="btn btn-dark">Validate</button>
+            <div style="min-height: 60px;">
+              <button onclick="validateJsonButton(event);" type="button" class="btn btn-dark btn-validate">VALIDATE</button>
+              <div id="span_validate_result"></div>
+            </div>
+            
             <button onclick="saveButton(event);" type="button" class="btn btn-secondary">SAVE</button>
             <button onclick="sendPush(event);" type="button" class="btn btn-success" style="float: right;">SEND PUSH</button>
           </form>
