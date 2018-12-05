@@ -10,7 +10,7 @@ function editButton(e) {
     $divEdit.find("#path").val(path);
     $divEdit.find("#token").val(json.token);
     $divEdit.find("input[name=production]").eq(json.production).prop("checked", true);
-    editor.set(json.aps);
+    editor.set(json.notification);
     jsonEditorExpandAll(editor.getMode());
   });
 }
@@ -24,12 +24,12 @@ function saveButton(e) {
   var production = $form.find("[name=production]:checked").val();
 
   try {
-    var aps = editor.get();
+    var notification = editor.get();
     var json = {
       path : path,
       token : token,
       production : Number(production),
-      aps : aps
+      notification : notification
     };
 
     requestXhttp("/apns", "POST", JSON.stringify(json),
@@ -74,12 +74,12 @@ function sendPush(e) {
   var production = $form.find("[name=production]:checked").val();
 
   try {
-    var aps = editor.get();
+    var notification = editor.get();
     var json = {
       path : path,
       token : token,
       production : Number(production),
-      aps : aps
+      notification : notification
     };
 
     requestXhttp("/apns/sendpush", "POST", JSON.stringify(json),

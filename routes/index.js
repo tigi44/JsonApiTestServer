@@ -104,7 +104,7 @@ router.post('/apns', function(req, res, next) {
     path : json.path,
     token : json.token,
     production : json.production,
-    aps : json.aps
+    notification : json.notification
   };
 
   resultData[json.path] = apnsJson;
@@ -136,7 +136,7 @@ router.post('/apns/sendpush', function(req, res, next) {
   var json = req.body;
 
   if (json.token) {
-    apn.push(json.production, json.token, json.aps);
+    apn.push(json.production, json.token, json.notification);
     res.json("푸쉬 전송 완료!!");
   } else {
     res.json("토큰값은 필수입니다.");

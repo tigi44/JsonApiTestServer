@@ -20,21 +20,20 @@ module.exports = {
 
     var apnConnection = new apn.Connection(options);
     var myDevice = new apn.Device(token);
-    var note = new apn.Notification();
+    var notification = new apn.Notification();
+
+    notification.badge = noteJson.aps.badge;
+    notification.sound = noteJson.aps.sound;
+    notification.alert = noteJson.aps.alert;
+    delete noteJson.aps;
+    notification.payload = noteJson;
 
     console.log("=== Start APNs Push ====");
     console.log("gateway : " + options.gateway);
     console.log("token : " + token);
-    console.log("noteJson : " + JSON.stringify(noteJson));
+    console.log("notification : " + JSON.stringify(notification));
 
-    note.badge = noteJson.badge;
-    note.sound = noteJson.sound;
-    note.alert = noteJson.alert;
-    if (noteJson.payload) {
-      note.payload = noteJson.payload;
-    }
-
-    apnConnection.pushNotification(note, myDevice);
+    apnConnection.pushNotification(notification, myDevice);
 
     console.log("=== End APNs Push ====");
   }
