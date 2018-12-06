@@ -35,7 +35,8 @@ module.exports = {
     notification.badge = noteJson.aps.badge;
     notification.sound = noteJson.aps.sound;
     notification.alert = noteJson.aps.alert;
-    notification.threadId = (noteJson.aps.alert["thread-id"])? noteJson.aps.alert["thread-id"] : noteJson.aps["thread-id"];
+    notification.threadId = noteJson.aps["thread-id"];
+    notification.category = noteJson.aps["category"];
 
     delete noteJson.aps;
     notification.payload = noteJson;
