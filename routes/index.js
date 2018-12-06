@@ -136,8 +136,13 @@ router.post('/apns/sendpush', function(req, res, next) {
   var json = req.body;
 
   if (json.token) {
-    apn.push(json.production, json.token, json.notification);
-    res.json("푸쉬 전송 완료!!");
+    apn.push(json.production, json.token, json.notification, function(errorMessage){
+      if (errorMessage) {
+        res.json(errorMessage);
+      } else {
+        res.json("푸쉬 전송 완료!!");
+      }
+    });
   } else {
     res.json("토큰값은 필수입니다.");
   }
