@@ -64,7 +64,7 @@
               <input type="text" class="form-control" id="token" name="token" required>
             </div>
 
-            <input type="radio" name="production" value="0" checked> 개발환경(개발등록기기 / sandbox) <input type="radio" name="production" value="1" style="margin-left: 10px;"> 제품환경(개발미등록기기 / production)
+            <input type="radio" name="production" value="0" checked> 개발환경(sandbox) <input type="radio" name="production" value="1" style="margin-left: 10px;"> 제품환경(production)
 
             <div id="jsoneditor" style="height: 300px;"></div>
 
@@ -72,7 +72,7 @@
               <button onclick="validateJsonButton(event);" type="button" class="btn btn-dark btn-validate">VALIDATE</button>
               <div id="span_validate_result"></div>
             </div>
-            
+
             <button onclick="saveButton(event);" type="button" class="btn btn-secondary">SAVE</button>
             <button onclick="sendPush(event);" type="button" class="btn btn-success" style="float: right;">SEND PUSH</button>
           </form>
