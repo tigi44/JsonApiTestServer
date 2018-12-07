@@ -1,6 +1,6 @@
 var apn = require('apn');
 
-var sanbaxGateway = 'gateway.sandbox.push.apple.com';
+var sandboxGateway = 'gateway.sandbox.push.apple.com';
 var gateway = 'gateway.push.apple.com';
 
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
     //   host: "192.168.10.92",
     //   port: 8080
     // },
-    gateway : sanbaxGateway,
+
     cert: './apns/keys/cert.pem',
     key: './apns/keys/key.pem',
     production: false
@@ -26,8 +26,7 @@ module.exports = {
 
     var options = this.options;
 
-    options.gateway = production ? gateway : sanbaxGateway;
-    options.priduction = production ? true : false;
+    options.production = production ? true : false;
 
     var apnProvider = new apn.Provider(options);
     var notification = new apn.Notification();
@@ -43,8 +42,8 @@ module.exports = {
     notification.topic = topic;
 
     console.log("=== Start APNs Push ====");
-    console.log("gateway : " + options.gateway);
-    console.log("production : " + options.priduction);
+    console.log("gateway : " + (options.production ? gateway : sandboxGateway));
+    console.log("production : " + options.production);
     console.log("token : " + token);
     console.log("notification : " + JSON.stringify(notification));
 
