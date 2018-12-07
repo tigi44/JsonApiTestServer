@@ -48,7 +48,7 @@ router.post('/scheme', function(req, res, next) {
   if (json.path.length < 1 ||
       json.name.length < 1 ||
       json.uri.length < 1) {
-      //throw new Error("All fields must be not empty");
+      res.status(422);
       res.json("All fields must be not empty");
       return;
   }
@@ -94,8 +94,7 @@ router.post('/apns', function(req, res, next) {
 
   if (json.path.length < 1 ||
       (json.token.length < 1)) {
-      //throw new Error("A path and token must be not empty");
-      res.status(500);
+      res.status(422);
       res.json("A path and token must be not empty");
       return;
   }
@@ -120,8 +119,7 @@ router.delete('/apns', function(req, res, next) {
   var apnsJson = {};
 
   if (json.path.length < 1) {
-      //throw new Error("A path and token must be not empty");
-      res.status(500);
+      res.status(422);
       res.json("A path must be not empty");
       return;
   }
@@ -138,6 +136,7 @@ router.post('/apns/sendpush', function(req, res, next) {
   if (json.token) {
     apn.push(json.production, json.token, json.notification, function(errorMessage){
       if (errorMessage) {
+        res.status(205);
         res.json(errorMessage);
       } else {
         res.json("푸쉬 전송 완료!!");
