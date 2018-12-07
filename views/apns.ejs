@@ -64,17 +64,17 @@
               <input type="text" class="form-control" id="token" name="token" required>
             </div>
 
-            <input type="radio" name="production" value="0" checked> 개발환경(sandbox) <input type="radio" name="production" value="1" style="margin-left: 10px;"> 제품환경(production)
+            <input type="radio" name="production" value="0" checked> 개발환경(sandbox) <input type="radio" name="production" value="1" style="margin-left: 5px;"> 제품환경(production)
 
             <div id="jsoneditor" style="height: 300px;"></div>
 
-            <div style="min-height: 60px;">
-              <button onclick="validateJsonButton(event);" type="button" class="btn btn-dark btn-validate">VALIDATE</button>
-              <div id="span_validate_result"></div>
+            <div id="span_validate_result" style="margin: 20px 0 20px 0;"></div>
+            <div>
+              <button onclick="sendPush(event);" type="button" class="btn btn-success">SEND PUSH</button>
+              <button onclick="validateJsonButton(event);" type="button" class="btn btn-dark btn-right" style="margin-left: 10px;">VALIDATE</button>
+              <button onclick="saveButton(event);" type="button" class="btn btn-secondary btn-right">SAVE</button>
             </div>
 
-            <button onclick="saveButton(event);" type="button" class="btn btn-secondary">SAVE</button>
-            <button onclick="sendPush(event);" type="button" class="btn btn-success" style="float: right;">SEND PUSH</button>
           </form>
         </div>
     </main>
