@@ -48,9 +48,10 @@
                                 <input type="hidden" name="path" value="<%= pathKey %>">
                                 <input type="hidden" name="name" value="<%= scheme[pathKey][nameKey].name %>">
                                 <input type="hidden" name="uri" value="<%= scheme[pathKey][nameKey].uri %>">
+                                <textarea style="display : none;"><%= scheme[pathKey][nameKey].desc %></textarea>
                               <button type="submit" onclick="deleteButton(event);" class="btn btn-danger btn-sm" style="float: right; padding: 5px 10px; margin: 5px 0px 5px 10px;">Delete</button>
                             </form>
-                            <button onclick="editButton(event, '<%= pathKey %>', '<%= scheme[pathKey][nameKey].name %>', '<%= scheme[pathKey][nameKey].uri %>');" class="btn btn-dark btn-sm mobile-display-none" style="float: right; padding: 5px 10px; margin: 5px 0;">Edit</button>
+                            <button onclick="editButton(event);" class="btn btn-dark btn-sm mobile-display-none" style="float: right; padding: 5px 10px; margin: 5px 0;">Edit</button>
                             <span style="margin:0;"><%= scheme[pathKey][nameKey].name %></span><br>
                             <a href="<%= scheme[pathKey][nameKey].uri %>" target="_blank" style="overflow: hidden; word-break: break-all;"><%= scheme[pathKey][nameKey].uri %></a>
                           </td>
@@ -79,6 +80,10 @@
             <div class="form-group">
               <label for="uri">URI :</label>
               <input type="text" class="form-control" id="uri" name="uri" required>
+            </div>
+            <div class="form-group">
+              <label for="desc">설명 :</label>
+              <textarea class="form-control" id="desc" name="desc" rows="20"></textarea>
             </div>
             <button type="submit" class="btn btn-secondary" style="float: right;">SAVE</button>
           </form>

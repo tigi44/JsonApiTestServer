@@ -1,14 +1,17 @@
 
-function editButton(e, path, name, uri) {
+function editButton(e) {
   var target   = e.target;
+  var prevForm = $(target).prev("form");
   var $divEdit = $("#div-edit");
   var $inputPath = $divEdit.find("#path");
   var $inputName = $divEdit.find("#name");
   var $inputURI  = $divEdit.find("#uri");
+  var $inputDesc  = $divEdit.find("#desc");
 
-  $inputPath.val(path);
-  $inputName.val(name);
-  $inputURI.val(uri);
+  $inputPath.val(prevForm.find("input[name=path]").val());
+  $inputName.val(prevForm.find("input[name=name]").val());
+  $inputURI.val(prevForm.find("input[name=uri]").val());
+  $inputDesc.val(prevForm.find("textarea").text());
 }
 
 function deleteButton(e) {
