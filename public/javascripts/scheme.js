@@ -1,4 +1,18 @@
 
+function addButton(e, path) {
+  var target   = e.target;
+  var $divEdit = $("#div-edit");
+  var $inputPath = $divEdit.find("#path");
+  var $inputName = $divEdit.find("#name");
+  var $inputURI  = $divEdit.find("#uri");
+  var $inputDesc  = $divEdit.find("#desc");
+
+  $inputPath.val(path);
+  $inputName.val('');
+  $inputURI.val('');
+  $inputDesc.val('');
+}
+
 function editButton(e) {
   var target   = e.target;
   var prevForm = $(target).prev("form");
