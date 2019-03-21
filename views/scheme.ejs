@@ -6,6 +6,7 @@
     <link href="/javascripts/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/styleIndex.css' />
+    <link rel='stylesheet' href='/stylesheets/tooltip.css' />
     <% include ./analytics.ejs %>
   </head>
   <body>
@@ -52,8 +53,13 @@
                               <button type="submit" onclick="deleteButton(event);" class="btn btn-danger btn-sm" style="float: right; padding: 5px 10px; margin: 5px 0px 5px 10px;">Delete</button>
                             </form>
                             <button onclick="editButton(event);" class="btn btn-dark btn-sm mobile-display-none" style="float: right; padding: 5px 10px; margin: 5px 0;">Edit</button>
-                            <span style="margin:0;"><%= scheme[pathKey][nameKey].name %></span><br>
-                            <a href="<%= scheme[pathKey][nameKey].uri %>" target="_blank" style="overflow: hidden; word-break: break-all;"><%= scheme[pathKey][nameKey].uri %></a>
+                            <div class="tooltip-area" style="width: 80%;">
+                              <% if(scheme[pathKey][nameKey].desc){ %>
+                                <textarea class="tooltiptext">설명 : &#10;&#10;<%= scheme[pathKey][nameKey].desc %></textarea>
+                              <% } %>
+                              <span style="margin:0;"><%= scheme[pathKey][nameKey].name %></span><br>
+                              <a href="<%= scheme[pathKey][nameKey].uri %>" target="_blank" style="overflow: hidden; word-break: break-all;"><%= scheme[pathKey][nameKey].uri %></a>
+                            </div>
                           </td>
                         </tr>
                       <% }); %>
@@ -64,9 +70,9 @@
             </div>
           <% }); %>
         <% } %>
-
-
         </div>
+
+
         <div id="div-edit" class="jumbotron json-edit">
           <form method="POST">
             <div class="form-group">

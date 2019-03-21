@@ -1,4 +1,16 @@
 
+$(document).ready(function() {
+  adjustTooltip();
+});
+
+function adjustTooltip() {
+  var $tooltips = $("textarea.tooltiptext");
+  $tooltips.each(function(index, item){
+     $(item).css('height', 'auto' );
+     $(item).height( this.scrollHeight );
+  });
+}
+
 function addButton(e, path) {
   var target   = e.target;
   var $divEdit = $("#div-edit");

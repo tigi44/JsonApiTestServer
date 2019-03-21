@@ -1,0 +1,24 @@
+
+.tooltiptext {
+  visibility: hidden;
+  resize: none;
+  width: 120%;
+  background-color: black;
+  opacity: 0.8;
+  color: #fff;
+  text-align: left;
+  padding: 10px;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+  /* top: -5px; */
+  left: 100%;
+}
+
+@media ( min-width: 1500px ) {
+  .tooltip-area:hover .tooltiptext {
+    visibility: visible;
+  }
+}
