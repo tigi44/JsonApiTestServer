@@ -22,3 +22,9 @@
     visibility: visible;
   }
 }
+
+@media ( max-width: 1500px ) {
+  .tooltiptext {
+    display: none;
+  }
+}
