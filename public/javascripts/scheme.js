@@ -53,6 +53,10 @@ function toggleTooltip($divTooltipArea, hastohide) {
     $materialIcon.text(textMaterialIconHelp);
     $buttonTooltip.addClass(classBtnDescOutline);
     $buttonTooltip.removeClass(classBtnDesc);
+    
+    $buttonTooltip.blur();
+    $buttonTooltip.mouseout();
+    $buttonTooltip.mouseleave();
   }
 }
 

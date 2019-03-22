@@ -10,7 +10,7 @@
   border-radius: 6px;
 
   position: absolute;
-  z-index: 100;
+  z-index: 1;
   left: 100%;
 }
 
