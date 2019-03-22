@@ -36,15 +36,23 @@ function toggleTooltip($divTooltipArea, hastohide) {
   var $buttonTooltip = $divTooltipArea.find("button.tooltipbtn");
   var $textareaTooltip = $divTooltipArea.find("textarea.tooltiptext");
   var classTTVisible = "tooltiptext-visible";
-  var textDefaultTooltip = "설명";
-  var textFixTooltip = "설명 고정";
+  var classBtnDescOutline = "btn-outline-dark";
+  var classBtnDesc = "btn-dark";
+  var $materialIcon = $buttonTooltip.find("i.material-icons");
+  var textMaterialIconHelp = "help";
+  var textMaterialIconCheck = "check_circle";
+
 
   if ($textareaTooltip.hasClass(classTTVisible) && !hastohide) {
     $textareaTooltip.removeClass(classTTVisible);
-    $buttonTooltip.text(textFixTooltip);
+    $materialIcon.text(textMaterialIconCheck);
+    $buttonTooltip.removeClass(classBtnDescOutline);
+    $buttonTooltip.addClass(classBtnDesc);
   } else {
     $textareaTooltip.addClass(classTTVisible);
-    $buttonTooltip.text(textDefaultTooltip);
+    $materialIcon.text(textMaterialIconHelp);
+    $buttonTooltip.addClass(classBtnDescOutline);
+    $buttonTooltip.removeClass(classBtnDesc);
   }
 }
 

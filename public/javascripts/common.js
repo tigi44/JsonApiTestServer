@@ -21,19 +21,21 @@ function addEventOnBtnShowDivEdit() {
 function addEventOnBtnCardHeader() {
   var elsBtnCardHeader = document.getElementsByClassName("btn-card-header");
   var classShow = "collapse-button-show";
-  var classHide = "collapse-button-hide"
+  var classHide = "collapse-button-hide";
+  var textWillBeShow = "expand_more";
+  var textWillBeHide = "expand_less"
 
   for(let i = 0; i < elsBtnCardHeader.length; i++) {
     elsBtnCardHeader[i].addEventListener("click", function(e) {
-      var elSpan = e.target.querySelector("span");
-      if (elSpan.classList.contains(classHide)) {
-        elSpan.classList.remove(classHide);
-        elSpan.classList.add(classShow);
-        elSpan.innerHTML = "▽&nbsp;";
-      } else {
+      var elSpan = e.target.querySelector("i.material-icons");
+      if (elSpan.classList.contains(classShow)) {
         elSpan.classList.remove(classShow);
         elSpan.classList.add(classHide);
-        elSpan.innerHTML = "△&nbsp;";
+        elSpan.innerHTML = textWillBeShow;
+      } else {
+        elSpan.classList.remove(classHide);
+        elSpan.classList.add(classShow);
+        elSpan.innerHTML = textWillBeHide;
       }
     })
   }
