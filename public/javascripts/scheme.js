@@ -27,18 +27,33 @@ function addButton(e, path) {
 
 function tooltipButton(e) {
   var target = e.target;
-  var $tooltipTextarea = $(target).next();
+  var $divTooltipArea = $(target).parents("div.tooltip-area");
+
+  toggleTooltip($divTooltipArea)
+}
+
+function toggleTooltip($divTooltipArea, hastohide) {
+  var $buttonTooltip = $divTooltipArea.find("button.tooltipbtn");
+  var $textareaTooltip = $divTooltipArea.find("textarea.tooltiptext");
   var classTTVisible = "tooltiptext-visible";
   var textDefaultTooltip = "설명";
-  var textFixTooltip = "설명 고정"; 
+  var textFixTooltip = "설명 고정";
 
-  if ($tooltipTextarea.hasClass(classTTVisible)) {
-    $tooltipTextarea.removeClass(classTTVisible);
-    $(target).text(textFixTooltip);
+  if ($textareaTooltip.hasClass(classTTVisible) && !hastohide) {
+    $textareaTooltip.removeClass(classTTVisible);
+    $buttonTooltip.text(textFixTooltip);
   } else {
-    $tooltipTextarea.addClass(classTTVisible);
-    $(target).text(textDefaultTooltip);
+    $textareaTooltip.addClass(classTTVisible);
+    $buttonTooltip.text(textDefaultTooltip);
   }
+}
+
+function hideAllTooltip() {
+  var $divTooltipList = $("div.tooltip-area");
+
+  $divTooltipList.each(function(index, div) {
+    toggleTooltip($(div), true);
+  });
 }
 
 function editButton(e) {
@@ -54,6 +69,8 @@ function editButton(e) {
   $inputName.val(prevForm.find("input[name=name]").val());
   $inputURI.val(prevForm.find("input[name=uri]").val());
   $inputDesc.val(prevForm.find("textarea").text());
+
+  hideAllTooltip();
 }
 
 function deleteButton(e) {
