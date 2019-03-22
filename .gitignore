@@ -39,3 +39,6 @@ jsonScheme/*
 # apns .pem
 apns/keys/cert.pem
 apns/keys/key.pem
+
+# apns json file
+jsonApns/*
