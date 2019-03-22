@@ -1,6 +1,5 @@
 
 .tooltiptext {
-  visibility: hidden;
   resize: none;
   width: 120%;
   background-color: black;
@@ -10,21 +9,25 @@
   padding: 10px;
   border-radius: 6px;
 
-  /* Position the tooltip text - see examples below! */
   position: absolute;
   z-index: 1;
-  /* top: -5px; */
   left: 100%;
 }
 
+.tooltiptext-visible {
+  visibility: hidden;
+}
+
 @media ( min-width: 1500px ) {
-  .tooltip-area:hover .tooltiptext {
+  .tooltip-area:hover .tooltiptext-visible {
     visibility: visible;
   }
 }
 
 @media ( max-width: 1500px ) {
   .tooltiptext {
-    display: none;
+    width: 100%;
+    left: 0%;
+    margin-top: 22px;
   }
 }

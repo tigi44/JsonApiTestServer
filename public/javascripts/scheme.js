@@ -25,6 +25,22 @@ function addButton(e, path) {
   $inputDesc.val('');
 }
 
+function tooltipButton(e) {
+  var target = e.target;
+  var $tooltipTextarea = $(target).next();
+  var classTTVisible = "tooltiptext-visible";
+  var textDefaultTooltip = "설명";
+  var textFixTooltip = "설명 고정"; 
+
+  if ($tooltipTextarea.hasClass(classTTVisible)) {
+    $tooltipTextarea.removeClass(classTTVisible);
+    $(target).text(textFixTooltip);
+  } else {
+    $tooltipTextarea.addClass(classTTVisible);
+    $(target).text(textDefaultTooltip);
+  }
+}
+
 function editButton(e) {
   var target   = e.target;
   var prevForm = $(target).prev("form");
