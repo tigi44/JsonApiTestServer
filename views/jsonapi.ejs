@@ -16,11 +16,12 @@
     <div class="filepath div_first">
       <% var keys = Object.keys(hierarchyFiles); %>
       <% if(keys.length > 0){ %>
-        <% keys.forEach(function(key) { %>
+        <% keys.forEach(function(key, index) { %>
           <div class="card">
             <div class="card-header">
               <h5 class="mb-0">
-                <button class="btn btn-link btn-card-header" data-toggle="collapse" data-target="#<%= key %>" aria-expanded="false" aria-controls="collapseOne">
+                <button class="btn btn-link btn-card-header" data-toggle="collapse" data-target="#<%= key %>" aria-expanded="false" aria-controls="collapseOne" style="width: 90%;text-align: left;">
+                  <span class="collapse-button-hide" style="font-size: 15px;font-weight: 400;">△&nbsp;</span>
                   <%= key %>
                 </button>
               </h5>
@@ -42,7 +43,7 @@
                     <% files.forEach(function(file) { %>
                       <tr>
                         <td><a href="<%= file %>" target="_blank" style="margin-left:5px;"><%= file %></a></td>
-                        <td><button onclick="showJsonButton(event);" class="btn btn-dark btn-sm">Show</button></td>
+                        <td><button onclick="showJsonButton(event);" class="btn btn-dark btn-sm btn-show-div-edit">Show</button></td>
                         <td><button onclick="deleteJsonButton(event);" class="btn btn-danger btn-sm">Delete</button></td>
                       </tr>
                     <% }); %>
@@ -55,17 +56,18 @@
       <% } %>
     </div>
 
-    <div class="jumbotron json-edit">
-        <div class="input-group mb-3">
-          <input type="text" id="input_json_url" class="form-control" placeholder="JSON API URL" aria-label="JSON API URL" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-dark" type="button" onclick="addJsonButton(event);">ADD</button>
-          </div>
+    <div id="div-edit" class="jumbotron json-edit">
+      <button type="button" id="btn-close-json-edit" class="btn btn-secondary" style="position: absolute; top: 20px; right: 32px;">X</button>
+      <div class="input-group mb-3">
+        <input type="text" id="input_json_url" class="form-control" placeholder="JSON API URL" aria-label="JSON API URL" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-dark" type="button" onclick="addJsonButton(event);">ADD</button>
         </div>
+      </div>
 
-        <div id="jsoneditor"></div>
-        <button onclick="validateJsonButton(event);" class="btn btn-dark btn-right">VALIDATE</button>
-        <span id="span_validate_result"></span>
+      <div id="jsoneditor"></div>
+      <button onclick="validateJsonButton(event);" class="btn btn-dark btn-right">VALIDATE</button>
+      <span id="span_validate_result"></span>
     </div>
   </main>
   </body>

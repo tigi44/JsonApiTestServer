@@ -20,11 +20,12 @@
 
         <% var pathKeys = Object.keys(scheme); %>
         <% if(pathKeys.length > 0){ %>
-          <% pathKeys.forEach(function(pathKey) { %>
+          <% pathKeys.forEach(function(pathKey, index) { %>
             <div class="card">
               <div class="card-header">
                 <h5 class="mb-0">
-                  <button class="btn btn-link btn-card-header" data-toggle="collapse" data-target="#<%= pathKey %>" aria-expanded="false" aria-controls="collapseOne">
+                  <button class="btn btn-link btn-card-header" data-toggle="collapse" data-target="#<%= pathKey %>" aria-expanded="false" aria-controls="collapseOne" style="width: 90%;text-align: left;">
+                    <span class="collapse-button-hide" style="font-size: 15px;font-weight: 400;">△&nbsp;</span>
                     <%= pathKey %>
                   </button>
                   <button onclick="addButton(event, '<%= pathKey %>');" class="btn btn-info btn-sm mobile-display-none" style="float: right; padding: 5px 10px; margin: 5px 0;">Add</button>
@@ -52,7 +53,7 @@
                                 <textarea style="display : none;"><%= scheme[pathKey][nameKey].desc %></textarea>
                               <button type="submit" onclick="deleteButton(event);" class="btn btn-danger btn-sm" style="float: right; padding: 5px 10px; margin: 5px 0px 5px 10px;">Delete</button>
                             </form>
-                            <button onclick="editButton(event);" class="btn btn-dark btn-sm mobile-display-none" style="float: right; padding: 5px 10px; margin: 5px 0;">Edit</button>
+                            <button onclick="editButton(event);" class="btn btn-dark btn-sm btn-show-div-edit mobile-display-none" style="float: right; padding: 5px 10px; margin: 5px 0;">Edit</button>
                             <div class="">
                               <% if(scheme[pathKey][nameKey].desc){ %>
                               <div class="tooltip-area">
@@ -76,7 +77,8 @@
         </div>
 
 
-        <div id="div-edit" class="jumbotron json-edit">
+        <div id="div-edit" class="jumbotron json-edit mobile-display-none">
+          <button type="button" id="btn-close-json-edit" class="btn btn-secondary" style="position: absolute; top: 20px; right: 32px;">X</button>
           <form method="POST">
             <div class="form-group">
               <label for="path">분류 :</label>
