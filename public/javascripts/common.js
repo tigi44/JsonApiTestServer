@@ -1,7 +1,10 @@
 window.onload = function() {
-  document.getElementById("btn-close-json-edit").addEventListener('click', function() {
-    document.getElementById("div-edit").style.display= "none";
-  });
+  var elCloseJsonEdit = document.getElementById("btn-close-json-edit");
+  if (elCloseJsonEdit) {
+    elCloseJsonEdit.addEventListener('click', function() {
+      document.getElementById("div-edit").style.display= "none";
+    });
+  }
 
   addEventOnBtnShowDivEdit();
   addEventOnBtnCardHeader();

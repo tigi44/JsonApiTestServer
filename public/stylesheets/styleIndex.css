@@ -1,3 +1,25 @@
+#a-logo {
+  width: 40px;
+  height: 40px;
+  background-size: 40px;
+  margin-right: 10px;
+  background-image: url(/logo_big.png);
+}
+
+
+/* common */
+
+button.btn-right {
+  float:right;
+}
+
+button.btn-margin-left-10 {
+  margin-left: 10px;
+}
+
+
+/* main container */
+
 main.container {
   margin-left: 100px;
 }
@@ -19,23 +41,20 @@ main.container > div.json-edit {
   left:55%;
 }
 
-#a-logo {
-  width: 40px;
-  height: 40px;
-  background-size: 40px;
-  margin-right: 10px;
-  background-image: url(/logo_big.png);
+#btn-close-json-edit {
+  position: absolute;
+  top: 20px;
+  right: 32px;
 }
+
+
+/* card */
 
 div.card {
   margin-top: 10px;
 }
 
-div.card .table {
-  margin-bottom: 0;
-}
-
-.card-header {
+div.card .card-header {
   padding: .45rem .45rem;
 }
 
@@ -43,17 +62,21 @@ button.btn-card-header {
   color: black;
   font-weight: bold;
   font-size: 20px;
+  width: 90%;
+  text-align: left;
+}
+
+div.card .table {
+  margin-bottom: 0;
 }
 
 tr td a.a-text-align {
-  margin-left:5px;
   overflow: hidden;
   word-break: break-all;
 }
 
-button.btn-right {
-  float:right;
-}
+
+/* json api page */
 
 #jsoneditor {
   width:100%;
@@ -68,7 +91,50 @@ button.btn-right {
   margin-top:10px;
 }
 
+button.btn-json {
+  padding: 5px 10px;
+  margin: 5px 0px;
+}
+
+
+/* scheme page */
+
+button.btn-add-scheme {
+  float: right;
+  padding: 5px 10px;
+  margin: 5px 0;
+}
+
+button.btn-scheme {
+  float: right;
+  padding: 5px 10px;
+  margin: 5px 0;
+}
+
+button.btn-scheme-delete-margin-left {
+  margin-left: 10px;
+}
+
+button.btn-tooltip {
+  height: 16px;
+  padding: 0px 5px;
+  margin: 4px 5px 4px 0px;
+  float: left;
+  font-size: 10px;
+}
+
+
+/* apns page */
+
+tr td div.div-token {
+  padding-right: 10px;
+  overflow: hidden;
+  word-break: break-all;
+}
+
+
 /* mobile view */
+
 @media ( max-width: 1024px ) {
   main.container {
     margin-left: 0;
@@ -94,7 +160,9 @@ button.btn-right {
   }
 }
 
+
 /* phone view */
+
 @media ( max-width: 512px ) {
   .phone-header-div>form {
     position: absolute;
@@ -121,7 +189,9 @@ button.btn-right {
   }
 }
 
+
 /* small phone */
+
 @media ( max-width: 350px ) {
   #a-logo {
     margin-right: 0;

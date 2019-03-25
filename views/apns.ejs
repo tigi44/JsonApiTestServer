@@ -36,10 +36,10 @@
                           <td>
                             <form method="POST" class="">
                                 <input type="hidden" name="path" value="<%= pathKey %>">
-                                <button type="submit" onclick="deleteButton(event);" class="btn btn-danger btn-sm" style="float: right; padding: 5px 10px; margin: 5px 0px 5px 10px;">Delete</button>
+                                <button type="submit" onclick="deleteButton(event);" class="btn btn-danger btn-sm btn-scheme btn-scheme-delete-margin-left">Delete</button>
                             </form>
-                            <button onclick="editButton(event);" class="btn btn-dark btn-sm" style="float: right; padding: 5px 10px; margin: 5px 0;">Show</button>
-                            <div style="padding-right: 10px; overflow: hidden; word-break: break-all;">토큰 : <%= apns[pathKey].token %></div>
+                            <button onclick="editButton(event);" class="btn btn-dark btn-sm btn-scheme">Show</button>
+                            <div class="div-token">토큰 : <%= apns[pathKey].token %></div>
                           </td>
                         </tr>
                   </tbody>
@@ -62,14 +62,14 @@
               <input type="text" class="form-control" id="token" name="token" required>
             </div>
 
-            <input type="radio" name="production" value="0" checked> 개발환경(sandbox) <input type="radio" name="production" value="1" style="margin-left: 5px;"> 제품환경(production)
+            <input type="radio" name="production" value="0" checked> 개발환경(sandbox) <input type="radio" name="production" value="1"> 제품환경(production)
 
             <div id="jsoneditor" style="height: 300px;"></div>
 
-            <div id="span_validate_result" style="margin: 20px 0 20px 0;"></div>
+            <div id="span_validate_result"></div>
             <div>
               <button onclick="sendPush(event);" type="button" class="btn btn-success">SEND PUSH</button>
-              <button onclick="validateJsonButton(event);" type="button" class="btn btn-dark btn-right" style="margin-left: 10px;">VALIDATE</button>
+              <button onclick="validateJsonButton(event);" type="button" class="btn btn-dark btn-right btn-margin-left-10">VALIDATE</button>
               <button onclick="saveButton(event);" type="button" class="btn btn-secondary btn-right">SAVE</button>
             </div>
 

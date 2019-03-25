@@ -35,7 +35,7 @@ function tooltipButton(e) {
 }
 
 function toggleTooltip($divTooltipArea, hastohide) {
-  var $buttonTooltip = $divTooltipArea.find("button.tooltipbtn");
+  var $buttonTooltip = $divTooltipArea.find("button.btn-tooltip");
   var $textareaTooltip = $divTooltipArea.find("textarea.tooltiptext");
   var classTTVisible = "tooltiptext-visible";
   var classBtnDescOutline = "btn-outline-dark";

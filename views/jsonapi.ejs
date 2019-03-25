@@ -18,7 +18,7 @@
           <div class="card">
             <div class="card-header">
               <h5 class="mb-0">
-                <button class="btn btn-link btn-card-header" data-toggle="collapse" data-target="#<%= key %>" aria-expanded="false" aria-controls="collapseOne" style="width: 90%;text-align: left;">
+                <button class="btn btn-link btn-card-header" data-toggle="collapse" data-target="#<%= key %>" aria-expanded="false" aria-controls="collapseOne">
                   <i class="collapse-button-show material-icons">expand_less</i>
                   <%= key %>
                 </button>
@@ -40,8 +40,8 @@
                     <% files.forEach(function(file) { %>
                       <tr>
                         <td style="vertical-align: middle;"><a href="<%= file %>" target="_blank" class="a-text-align"><%= file %></a></td>
-                        <td><button onclick="showJsonButton(event);" class="btn btn-dark btn-sm btn-show-div-edit" style="padding: 5px 10px; margin: 5px 0px;">Show</button></td>
-                        <td><button onclick="deleteJsonButton(event);" class="btn btn-danger btn-sm" style="padding: 5px 10px; margin: 5px 0px;">Delete</button></td>
+                        <td><button onclick="showJsonButton(event);" class="btn btn-dark btn-sm btn-show-div-edit btn-json">Show</button></td>
+                        <td><button onclick="deleteJsonButton(event);" class="btn btn-danger btn-sm btn-json">Delete</button></td>
                       </tr>
                     <% }); %>
                   <% } %>
@@ -54,7 +54,7 @@
     </div>
 
     <div id="div-edit" class="jumbotron json-edit">
-      <button type="button" id="btn-close-json-edit" class="btn btn-secondary" style="position: absolute; top: 20px; right: 32px;">X</button>
+      <button type="button" id="btn-close-json-edit" class="btn btn-secondary">X</button>
       <div class="input-group mb-3">
         <input type="text" id="input_json_url" class="form-control" placeholder="JSON API URL" aria-label="JSON API URL" aria-describedby="basic-addon2">
         <div class="input-group-append">

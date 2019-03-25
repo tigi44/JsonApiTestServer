@@ -22,11 +22,11 @@
             <div class="card" style="z-index: <%= pathKeys.length - index %>;">
               <div class="card-header">
                 <h5 class="mb-0">
-                  <button class="btn btn-link btn-card-header" data-toggle="collapse" data-target="#<%= pathKey %>" aria-expanded="false" aria-controls="collapseOne" style="width: 90%;text-align: left;">
+                  <button class="btn btn-link btn-card-header" data-toggle="collapse" data-target="#<%= pathKey %>" aria-expanded="false" aria-controls="collapseOne">
                     <i class="collapse-button-show material-icons">expand_less</i>
                     <%= pathKey %>
                   </button>
-                  <button onclick="addButton(event, '<%= pathKey %>');" class="btn btn-info btn-sm btn-show-div-edit mobile-display-none" style="float: right; padding: 5px 10px; margin: 5px 0;">Add</button>
+                  <button onclick="addButton(event, '<%= pathKey %>');" class="btn btn-info btn-sm btn-show-div-edit mobile-display-none btn-add-scheme">Add</button>
                 </h5>
               </div>
 
@@ -49,18 +49,18 @@
                                 <input type="hidden" name="name" value="<%= scheme[pathKey][nameKey].name %>">
                                 <input type="hidden" name="uri" value="<%= scheme[pathKey][nameKey].uri %>">
                                 <textarea style="display : none;"><%= scheme[pathKey][nameKey].desc %></textarea>
-                              <button type="submit" onclick="deleteButton(event);" class="btn btn-danger btn-sm" style="float: right; padding: 5px 10px; margin: 5px 0px 5px 10px;">Delete</button>
+                              <button type="submit" onclick="deleteButton(event);" class="btn btn-danger btn-sm btn-scheme btn-scheme-delete-margin-left">Delete</button>
                             </form>
-                            <button onclick="editButton(event);" class="btn btn-dark btn-sm btn-show-div-edit mobile-display-none" style="float: right; padding: 5px 10px; margin: 5px 0;">Edit</button>
+                            <button onclick="editButton(event);" class="btn btn-dark btn-sm btn-show-div-edit mobile-display-none btn-scheme">Edit</button>
                             <div class="">
                               <% if(scheme[pathKey][nameKey].desc){ %>
                               <div class="tooltip-area">
-                                <button onclick="tooltipButton(event);" class="tooltipbtn btn btn-outline-dark btn-sm" style="height: 16px;padding: 0px 5px;margin: 4px 5px 4px 0px;float: left;font-size: 10px;}"><span>설명&nbsp;</span><i class="material-icons float-right">help</i></button>
+                                <button onclick="tooltipButton(event);" class="btn btn-outline-dark btn-sm btn-tooltip"><span>설명&nbsp;</span><i class="material-icons float-right">help</i></button>
                                 <textarea class="tooltiptext tooltiptext-visible" readonly><%= scheme[pathKey][nameKey].name %> : &#10;&#10;<%= scheme[pathKey][nameKey].desc %></textarea>
                               </div>
                               <% } %>
-                              <span style="margin:0;"><%= scheme[pathKey][nameKey].name %></span><br>
-                              <a href="<%= scheme[pathKey][nameKey].uri %>" target="_blank" style="overflow: hidden; word-break: break-all;"><%= scheme[pathKey][nameKey].uri %></a>
+                              <span><%= scheme[pathKey][nameKey].name %></span><br>
+                              <a href="<%= scheme[pathKey][nameKey].uri %>" target="_blank" class="a-text-align"><%= scheme[pathKey][nameKey].uri %></a>
                             </div>
                           </td>
                         </tr>
@@ -76,7 +76,7 @@
 
 
         <div id="div-edit" class="jumbotron json-edit mobile-display-none">
-          <button type="button" id="btn-close-json-edit" class="btn btn-secondary" style="position: absolute; top: 20px; right: 32px;">X</button>
+          <button type="button" id="btn-close-json-edit" class="btn btn-secondary">X</button>
           <form method="POST">
             <div class="form-group">
               <label for="path">분류 :</label>
@@ -94,7 +94,7 @@
               <label for="desc">설명 :</label>
               <textarea class="form-control" id="desc" name="desc" rows="10"></textarea>
             </div>
-            <button type="submit" class="btn btn-secondary" style="float: right;">SAVE</button>
+            <button type="submit" class="btn btn-secondary btn-right">SAVE</button>
           </form>
         </div>
     </main>
