@@ -17,13 +17,13 @@
   visibility: hidden;
 }
 
-@media ( min-width: 1500px ) {
+@media ( min-width: 1400px ) {
   .tooltip-area:hover .tooltiptext-visible {
     visibility: visible;
   }
 }
 
-@media ( max-width: 1500px ) {
+@media ( max-width: 1400px ) {
   .tooltiptext {
     width: 100%;
     left: 0%;
