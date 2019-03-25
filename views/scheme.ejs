@@ -19,7 +19,7 @@
         <% var pathKeys = Object.keys(scheme); %>
         <% if(pathKeys.length > 0){ %>
           <% pathKeys.forEach(function(pathKey, index) { %>
-            <div class="card">
+            <div class="card" style="z-index: auto">
               <div class="card-header">
                 <h5 class="mb-0">
                   <button class="btn btn-link btn-card-header" data-toggle="collapse" data-target="#<%= pathKey %>" aria-expanded="false" aria-controls="collapseOne" style="width: 90%;text-align: left;">
