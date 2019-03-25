@@ -41,6 +41,12 @@ button.btn-card-header {
   font-size: 20px;
 }
 
+tr td a.a-text-align {
+  margin-left:5px;
+  overflow: hidden;
+  word-break: break-all;
+}
+
 button.btn-validate {
   float:right;
 }
