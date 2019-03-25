@@ -80,12 +80,16 @@ button.btn-right {
 
 /* phone view */
 @media ( max-width: 512px ) {
-  .mobile-header-div>form {
+  .phone-header-div>form {
     position: absolute;
-    top: 55px;
+    top: 56px;
     left: 0px;
     margin: 0!important;
     width: 100%;
+  }
+
+  .phone-no-border-radius {
+    border-radius: 0;
   }
 
   main.container > div.div_first {
@@ -98,5 +102,24 @@ button.btn-right {
     position:fixed;
     left:55%;
     margin-top: 50px;
+  }
+}
+
+/* small phone */
+@media ( max-width: 350px ) {
+  #a-logo {
+    margin-right: 0;
+  }
+  
+  .navbar {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .phone-header-div {
+    font-size: 14px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
   }
 }
