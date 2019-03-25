@@ -39,7 +39,7 @@
                   <% if(files.length > 0){ %>
                     <% files.forEach(function(file) { %>
                       <tr>
-                        <td style="vertical-align: middle;"><a href="<%= file %>" target="_blank" style="margin-left:5px;overflow: hidden;word-break: break-all;"><%= file %></a></td>
+                        <td style="vertical-align: middle;"><a href="<%= file %>" target="_blank" class="a-text-align"><%= file %></a></td>
                         <td><button onclick="showJsonButton(event);" class="btn btn-dark btn-sm btn-show-div-edit" style="padding: 5px 10px; margin: 5px 0px;">Show</button></td>
                         <td><button onclick="deleteJsonButton(event);" class="btn btn-danger btn-sm" style="padding: 5px 10px; margin: 5px 0px;">Delete</button></td>
                       </tr>
