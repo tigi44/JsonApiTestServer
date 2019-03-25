@@ -23,6 +23,8 @@ function addButton(e, path) {
   $inputName.val('');
   $inputURI.val('');
   $inputDesc.val('');
+
+  hideAllTooltip();
 }
 
 function tooltipButton(e) {
@@ -53,7 +55,7 @@ function toggleTooltip($divTooltipArea, hastohide) {
     $materialIcon.text(textMaterialIconHelp);
     $buttonTooltip.addClass(classBtnDescOutline);
     $buttonTooltip.removeClass(classBtnDesc);
-    
+
     $buttonTooltip.blur();
     $buttonTooltip.mouseout();
     $buttonTooltip.mouseleave();
