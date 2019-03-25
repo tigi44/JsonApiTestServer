@@ -62,8 +62,7 @@ button.btn-right {
   margin-top:10px;
 }
 
-/* scheme */
-
+/* mobile view */
 @media ( max-width: 1024px ) {
   main.container {
     margin-left: 0;
@@ -79,7 +78,8 @@ button.btn-right {
   }
 }
 
-@media ( max-width: 526px ) {
+/* phone view */
+@media ( max-width: 512px ) {
   .mobile-header-div>form {
     position: absolute;
     top: 55px;
