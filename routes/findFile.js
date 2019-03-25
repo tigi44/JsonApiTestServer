@@ -20,7 +20,7 @@ module.exports = {
         } else {
           filename = filename.replace('jsonFile', '');
           if (path.extname(filename) == this.extJson) {
-            if (filename.includes(search)) {
+            if (filename.toLowerCase().indexOf(search.toLowerCase()) > -1) {
               fileNames.push(filename);
             }
           }
