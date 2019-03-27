@@ -6,7 +6,7 @@ module.exports = {
 
     if (desc) {
       cardHtml += '<div class="tooltip-area">';
-      cardHtml += '<button class="btn btn-outline-dark btn-sm btn-tooltip"><span>설명&nbsp;</span><i class="material-icons mi-middle">help</i></button>';
+      cardHtml += '<button class="btn btn-outline-secondary btn-sm btn-tooltip"><i class="material-icons mi-middle">help</i></button>';
       cardHtml += '<textarea class="tooltiptext tooltiptext-visible" readonly>' + desc + '</textarea>';
       cardHtml += '</div>';
     }
