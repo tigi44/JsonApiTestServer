@@ -7,7 +7,7 @@ function requestXhttp(url, method, data, successCallback, errorCallback) {
       }
     } else if (this.readyState == 4 && this.status != 200) {
       if (errorCallback) {
-        errorCallback(this.responseText);
+        errorCallback(!this.responseText ? 'SERVER ERROR' : this.responseText);
       } else {
         // console.log(this);
         alert("Server Error : " + this.responseText);

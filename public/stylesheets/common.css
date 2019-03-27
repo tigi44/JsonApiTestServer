@@ -144,4 +144,6 @@ tr td div.div-contents p {
   font-size: 20px;
   font-weight: 400;
   margin-bottom: 1px;
+  overflow: hidden;
+  word-break: break-all;
 }

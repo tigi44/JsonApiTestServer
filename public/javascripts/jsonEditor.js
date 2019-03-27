@@ -57,8 +57,12 @@ function _errorValidateResult(validateResult) {
 function _getEditorText() {
   return editor.getText();
 }
+function _getEditorJson() {
+  return editor.get();
+}
 
-function _setEditorText(text) {
+function _setEditorJson(text) {
   editor.set(text);
   jsonEditorExpandAll(editor.getMode());
+  _errorValidateResult('');
 }

@@ -25,7 +25,7 @@ function addButton(e) {
   var requestUrl  = "/" + $(this).attr("data-key") + "/";
 
   $jsonUrlModal.val(requestUrl);
-  _setEditorText({});
+  _setEditorJson({});
 }
 
 function editButton(e) {
@@ -36,7 +36,7 @@ function editButton(e) {
     var json = JSON.parse(jsonString);
 
     $jsonUrlModal.val(requestUrl);
-    _setEditorText(json);
+    _setEditorJson(json);
   });
 }
 

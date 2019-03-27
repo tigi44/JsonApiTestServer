@@ -21,8 +21,8 @@ function addEventOnBtnCardMainAdd() {
       target.value = '';
     });
 
-    if (typeof _setEditorText === "function") {
-      _setEditorText({});
+    if (typeof _setEditorJson === "function") {
+      _setEditorJson({});
     }
   });
 }
