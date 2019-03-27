@@ -15,8 +15,8 @@ module.exports = {
     cardHtml += '<a href="' + uri + '" target="_blank" class="a-text-align">' + uri + '</a>';
     cardHtml += '</div>';
     cardHtml += '<div class="btn-group float-right">';
-    cardHtml += '<button class="btn btn-outline-info btn-sm float-right"><i class="material-icons mi-middle">create</i></button>';
-    cardHtml += '<button class="btn btn-outline-danger btn-sm float-right"><i class="material-icons mi-middle">delete_forever</i></button>';
+    cardHtml += '<button class="btn btn-outline-info btn-sm float-right btn-card-edit" data-toggle="modal" data-target="#myModal"><i class="material-icons mi-middle">create</i></button>';
+    cardHtml += '<button class="btn btn-outline-danger btn-sm float-right btn-card-delete"><i class="material-icons mi-middle">delete_forever</i></button>';
     cardHtml += '</div></td></tr>';
     return cardHtml;
   },
@@ -30,7 +30,7 @@ module.exports = {
       cardHtml += '<i class="collapse-button-show material-icons mi-large">expand_less</i>';
       cardHtml += pathKey;
       cardHtml += '</button>';
-      cardHtml += '<button class="btn btn-outline-dark btn-sm"><i class="material-icons mi-middle">add</i></button>';
+      cardHtml += '<button class="btn btn-outline-dark btn-sm btn-card-add" data-toggle="modal" data-target="#myModal" data-url="' + pathKey + '"><i class="material-icons mi-middle">add</i></button>';
       cardHtml += '</div>';
 
       cardHtml += '<div id="' + pathKey + '" class="table-responsive collapse show">';
@@ -69,7 +69,7 @@ module.exports = {
     let cardHtml = '';
 
     cardHtml += '<div class="card-main-header">';
-    cardHtml += '<button class="btn btn-outline-dark btn-sm float-right" data-toggle="modal" data-target="#myModal"><i class="material-icons mi-large">add</i></button>';
+    cardHtml += '<button id="btn-card-main-add" class="btn btn-outline-dark btn-sm float-right" data-toggle="modal" data-target="#myModal"><i class="material-icons mi-large">add</i></button>';
     cardHtml += '<div class="btn-group btn-group-toggle" data-toggle="buttons">';
     cardHtml += '<label class="btn btn-outline-secondary active"><input type="radio" name="radio-card" value="agenda" autocomplete="off" checked><i class="material-icons mi-large">view_agenda</i></label>';
     cardHtml += '<label class="btn btn-outline-secondary"><input type="radio" name="radio-card" value="headline" autocomplete="off" checked><i class="material-icons mi-large">view_headline</i></label>';

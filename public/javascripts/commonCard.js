@@ -2,7 +2,22 @@
 window.onload = function() {
   addEventOnBtnCardHeader();
   addEventOnRadioCardAgenda();
+  addEventOnBtnCardMainAdd();
 };
+
+function addEventOnBtnCardMainAdd() {
+  var elBtnCardMainAdd = document.getElementById("btn-card-main-add");
+
+  elBtnCardMainAdd.addEventListener("click", function(e) {
+    var elModal = document.getElementById("myModal");
+    var elsInput = elModal.querySelectorAll('input');
+
+    elsInput.forEach(function(target) {
+      target.value = '';
+      _setEditorText({});
+    });
+  });
+}
 
 function addEventOnBtnCardHeader() {
   var elsBtnCardHeader = document.getElementsByClassName("btn-card-header");

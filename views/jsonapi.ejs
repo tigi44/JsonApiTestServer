@@ -27,12 +27,17 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            Modal body..
+            <div class="input-group mb-3">
+              <input type="text" id="input_json_url" class="form-control" placeholder="JSON API URL" aria-label="JSON API URL" aria-describedby="basic-addon2">
+            </div>
+            <div id="jsoneditor" style="height: 500px;"></div>
           </div>
 
           <!-- Modal footer -->
           <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+            <div class="btn-group">
+              <button class="btn btn-info btn-modal-save" type="button">SAVE</button>
+            </div>
           </div>
 
         </div>
@@ -46,5 +51,6 @@
   <% include ./common/commonScript.ejs %>
   <script src="/javascripts/jsoneditor/dist/jsoneditor.min.js"></script>
   <script src="/javascripts/commonCard.js"></script>
-  <!-- <script src="/javascripts/jsonapi.js"></script> -->
+  <script src="/javascripts/jsonEditor.js"></script>
+  <script src="/javascripts/jsonapi.js"></script>
 </html>
