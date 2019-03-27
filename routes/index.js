@@ -9,7 +9,7 @@ var renderView = function(req, viewName) {
   var renderView = viewName;
   var viewVersionParam = req.query.view;
 
-  if (viewVersionParam === 'old') {
+  if (viewVersionParam !== 'new') {
     renderView += '_old';
   }
 
