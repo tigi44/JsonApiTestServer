@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <% include ./common/commonCss.ejs %>
+    <link rel='stylesheet' href='/stylesheets/styleIndex.css' />
+    <% include ./common/analytics.ejs %>
+  </head>
+  <body>
+
+    <header>
+      <% include ./common/header.ejs %>
+    </header>
+
+    <main class="container" role="main">
+        <div id="" class="filepath div_first">
+
+        <% var pathKeys = Object.keys(apns); %>
+        <% if(pathKeys.length > 0){ %>
+          <% pathKeys.forEach(function(pathKey) { %>
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">
+                  <div><%= pathKey %></div>
+                </h5>
+              </div>
+
+              <div id="<%= pathKey %>" class="table-responsive collapse show">
+                <table class="table table-striped table-sm card-body">
+                  <colgroup>
+                    <col style="width:100%">
+                  </colgroup>
+                  <thead>
+                  </thead>
+                  <tbody>
+                        <tr>
+                          <td>
+                            <form method="POST" class="">
+                                <input type="hidden" name="path" value="<%= pathKey %>">
+                                <button type="submit" onclick="deleteButton(event);" class="btn btn-danger btn-sm btn-scheme btn-scheme-delete-margin-left">Delete</button>
+                            </form>
+                            <button onclick="editButton(event);" class="btn btn-dark btn-sm btn-scheme">Show</button>
+                            <div class="div-token">토큰 : <%= apns[pathKey].token %></div>
+                          </td>
+                        </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          <% }); %>
+        <% } %>
+
+
+        </div>
+        <div id="div-edit2" class="jumbotron json-edit">
+          <form method="POST">
+            <div class="form-group">
+              <label for="path">분류 :</label>
+              <input type="text" class="form-control" id="path" name="path" required>
+            </div>
+            <div class="form-group">
+              <label for="token">토큰 :</label>
+              <input type="text" class="form-control" id="token" name="token" required>
+            </div>
+
+            <input type="radio" name="production" value="0" checked> 개발환경(sandbox) <input type="radio" name="production" value="1"> 제품환경(production)
+
+            <div id="jsoneditor" style="height: 300px;"></div>
+
+            <div id="span_validate_result"></div>
+            <div>
+              <button onclick="sendPush(event);" type="button" class="btn btn-success">SEND PUSH</button>
+              <button onclick="validateJsonButton(event);" type="button" class="btn btn-dark btn-right btn-margin-left-10">VALIDATE</button>
+              <button onclick="saveButton(event);" type="button" class="btn btn-secondary btn-right">SAVE</button>
+            </div>
+
+          </form>
+        </div>
+    </main>
+    </body>
+
+    <% include ./common/commonScript.ejs %>
+    <script src="/javascripts/jsoneditor/dist/jsoneditor.min.js"></script>
+    <script src="/javascripts/jsonapi.js"></script>
+    <script src="/javascripts/apns.js"></script>
+    <script src="/javascripts/common.js"></script>
+</html>

@@ -3,6 +3,18 @@ var router  = express.Router();
 var fs      = require('fs');
 var ff      = require('../routes/findFile');
 var apn     = require('../routes/apns');
+var html    = require('../routes/html');
+
+var renderView = function(req, viewName) {
+  var renderView = viewName;
+  var viewVersionParam = req.query.view;
+
+  if (viewVersionParam === 'old') {
+    renderView += '_old';
+  }
+
+  return renderView;
+};
 
 /* GET json path list */
 router.get('/' + ff.extJson, function(req, res, next) {
@@ -20,10 +32,11 @@ router.get('/', function(req, res, next) {
   if (contentType == 'application/json') {
     res.json(ff.hierarchyFiles(files));
   } else {
-    res.render('jsonapi', {
+    res.render(renderView(req, 'jsonapi'), {
       title             : 'JSON API TEST SERVER',
       headerMenu        : 0,
       hierarchyFiles    : ff.hierarchyFiles(files),
+      cardHtml          : html.card(ff.hierarchyFiles(files), true),
       search            : search
     });
   }
@@ -33,9 +46,10 @@ router.get('/scheme', function(req, res, next) {
   var search = req.query.search;
   var filePath = "jsonScheme/scheme.json";
 
-  res.render('scheme', {
+  res.render(renderView(req, 'scheme'), {
     title             : 'SCHEME TEST',
     scheme            : ff.getFileJson(filePath, search),
+    cardHtml          : html.card(ff.getFileJson(filePath, search), false),
     headerMenu        : 1,
     search            : search
   });
@@ -78,9 +92,10 @@ router.get('/apns', function(req, res, next) {
     var resultData = ff.getFileJson(filePath);
     res.json(resultData[path]);
   } else {
-    res.render('apns', {
+    res.render(renderView(req, 'apns'), {
       title             : 'APNS TEST',
       apns              : ff.getFileJson(filePath, search),
+      cardHtml          : html.card(ff.getFileJson(filePath, search), false),
       headerMenu        : 2,
       search            : search
     });
@@ -148,7 +163,7 @@ router.post('/apns/sendpush', function(req, res, next) {
 });
 
 router.get('/uriencodedecode', function(req, res, next) {
-  res.render('uriencodedecode', {
+  res.render(renderView(req, 'uriencodedecode'), {
     title             : 'URI ENCODE / DECODE',
     headerMenu        : 3
   });
