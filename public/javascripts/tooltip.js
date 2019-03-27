@@ -23,8 +23,8 @@ function toggleTooltip($divTooltipArea, hastohide) {
   var $buttonTooltip = $divTooltipArea.find("button.btn-tooltip");
   var $textareaTooltip = $divTooltipArea.find("textarea.tooltiptext");
   var classTTVisible = "tooltiptext-visible";
-  var classBtnDescOutline = "btn-outline-dark";
-  var classBtnDesc = "btn-dark";
+  var classBtnDescOutline = "btn-outline-secondary";
+  var classBtnDesc = "btn-secondary";
   var $materialIcon = $buttonTooltip.find("i.material-icons");
   var textMaterialIconHelp = "help";
   var textMaterialIconCheck = "check_circle";
