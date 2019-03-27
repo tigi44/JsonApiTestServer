@@ -82,6 +82,55 @@ router.post('/scheme', function(req, res, next) {
 
   res.redirect(303, '/scheme');
 });
+router.post('/schemePost', function(req, res, next) {
+  console.log(req.body);
+  var json = req.body;
+  var filePath = "jsonScheme/scheme.json";
+  var resultData = ff.getFileJson(filePath);
+
+  if (!json.path ||
+      !json.name ||
+      !json.uri) {
+      res.status(422);
+      res.json("All fields must be not empty");
+      return;
+  }
+
+  var pathList = resultData[json.path];
+  if (!pathList) {
+    pathList = {};
+  }
+  pathList[json.name] = json;
+  resultData[json.path] = pathList;
+
+  fs.writeFileSync(filePath, JSON.stringify(resultData), 'utf8');
+
+  res.json("ok");
+});
+router.delete('/scheme', function(req, res, next) {
+  var json = req.body;
+  var filePath = "jsonScheme/scheme.json";
+  var resultData = ff.getFileJson(filePath);
+  var apnsJson = {};
+
+  if (!json.path ||
+      !json.name) {
+      res.status(422);
+      res.json("A path and a name must be not empty");
+      return;
+  }
+
+  var pathList = resultData[json.path];
+  if (!pathList) {
+    pathList = {};
+  }
+  delete pathList[json.name];
+  resultData[json.path] = pathList;
+
+  fs.writeFileSync(filePath, JSON.stringify(resultData), 'utf8');
+
+  res.json("ok");
+});
 
 router.get('/apns', function(req, res, next) {
   var search = req.query.search;
@@ -107,8 +156,8 @@ router.post('/apns', function(req, res, next) {
   var resultData = ff.getFileJson(filePath);
   var apnsJson = {};
 
-  if (json.path.length < 1 ||
-      (json.token.length < 1)) {
+  if (!json.path ||
+      !json.token) {
       res.status(422);
       res.json("A path and token must be not empty");
       return;
@@ -133,7 +182,7 @@ router.delete('/apns', function(req, res, next) {
   var resultData = ff.getFileJson(filePath);
   var apnsJson = {};
 
-  if (json.path.length < 1) {
+  if (!json.path) {
       res.status(422);
       res.json("A path must be not empty");
       return;

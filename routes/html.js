@@ -1,13 +1,13 @@
 module.exports = {
-  cardBody : function(name, uri, desc) {
+  cardBody : function(pathKey, name, uri, desc) {
     let cardHtml = '';
     cardHtml += '<tr><td>';
     cardHtml += '<div class="div-contents">';
 
     if (desc) {
       cardHtml += '<div class="tooltip-area">';
-      cardHtml += '<button class="btn btn-outline-dark btn-sm"><span>설명&nbsp;</span><i class="material-icons mi-middle">help</i></button>';
-      cardHtml += '<textarea class="tooltiptext tooltiptext-visible" readonly>' + name + ' : &#10;&#10;' + desc + '</textarea>';
+      cardHtml += '<button class="btn btn-outline-dark btn-sm btn-tooltip"><span>설명&nbsp;</span><i class="material-icons mi-middle">help</i></button>';
+      cardHtml += '<textarea class="tooltiptext tooltiptext-visible" readonly>' + desc + '</textarea>';
       cardHtml += '</div>';
     }
 
@@ -15,8 +15,8 @@ module.exports = {
     cardHtml += '<a href="' + uri + '" target="_blank" class="a-text-align">' + uri + '</a>';
     cardHtml += '</div>';
     cardHtml += '<div class="btn-group float-right">';
-    cardHtml += '<button class="btn btn-outline-info btn-sm float-right btn-card-edit" data-toggle="modal" data-target="#myModal"><i class="material-icons mi-middle">create</i></button>';
-    cardHtml += '<button class="btn btn-outline-danger btn-sm float-right btn-card-delete"><i class="material-icons mi-middle">delete_forever</i></button>';
+    cardHtml += '<button class="btn btn-outline-info btn-sm float-right btn-card-edit" data-toggle="modal" data-target="#myModal" data-key="' + pathKey + '"><i class="material-icons mi-middle">create</i></button>';
+    cardHtml += '<button class="btn btn-outline-danger btn-sm float-right btn-card-delete" data-key="' + pathKey + '"><i class="material-icons mi-middle">delete_forever</i></button>';
     cardHtml += '</div></td></tr>';
     return cardHtml;
   },
@@ -30,7 +30,7 @@ module.exports = {
       cardHtml += '<i class="collapse-button-show material-icons mi-large">expand_less</i>';
       cardHtml += pathKey;
       cardHtml += '</button>';
-      cardHtml += '<button class="btn btn-outline-dark btn-sm btn-card-add" data-toggle="modal" data-target="#myModal" data-url="' + pathKey + '"><i class="material-icons mi-middle">add</i></button>';
+      cardHtml += '<button class="btn btn-outline-dark btn-sm btn-card-add" data-toggle="modal" data-target="#myModal" data-key="' + pathKey + '"><i class="material-icons mi-middle">add</i></button>';
       cardHtml += '</div>';
 
       cardHtml += '<div id="' + pathKey + '" class="table-responsive collapse show">';
@@ -42,17 +42,17 @@ module.exports = {
         let files = json[pathKey];
         if (files.length > 0) {
           files.forEach(function(file) {
-            cardHtml += thisModule.cardBody('', file, '');
+            cardHtml += thisModule.cardBody(pathKey, '', file, '');
           });
         }
       } else {
         let nameKeys = Object.keys(json[pathKey]);
         if (nameKeys.length > 0) {
           if (nameKeys.includes('token') && nameKeys.includes('notification')) {
-            cardHtml += thisModule.cardBody('token : ' + json[pathKey].token, '', '');
+            cardHtml += thisModule.cardBody(pathKey, 'token : ' + json[pathKey].token, '', '');
           } else {
             nameKeys.forEach(function(nameKey) {
-              cardHtml += thisModule.cardBody(json[pathKey][nameKey].name, json[pathKey][nameKey].uri, json[pathKey][nameKey].desc);
+              cardHtml += thisModule.cardBody(pathKey, json[pathKey][nameKey].name, json[pathKey][nameKey].uri, json[pathKey][nameKey].desc);
             });
           }
         }

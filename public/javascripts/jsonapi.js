@@ -1,12 +1,12 @@
 
-$(document).on('click', '.btn-modal-save', saveJsonButton);
-$(document).on('click', '.btn-card-add', addJsonButton);
-$(document).on('click', '.btn-card-edit', editJsonButton);
-$(document).on('click', '.btn-card-delete', deleteJsonButton);
+$(document).on('click', '.btn-modal-save', saveButton);
+$(document).on('click', '.btn-card-add', addButton);
+$(document).on('click', '.btn-card-edit', editButton);
+$(document).on('click', '.btn-card-delete', deleteButton);
 
 let $jsonUrlModal = $("#input_json_url");
 
-function saveJsonButton(e) {
+function saveButton(e) {
   var $inputTag  = $("#input_json_url");
   var requestUrl  = $inputTag.val();
   var jsonString  = _getEditorText();
@@ -21,14 +21,14 @@ function saveJsonButton(e) {
   });
 }
 
-function addJsonButton(e) {
-  var requestUrl  = "/" + $(this).attr("data-url") + "/";
+function addButton(e) {
+  var requestUrl  = "/" + $(this).attr("data-key") + "/";
 
   $jsonUrlModal.val(requestUrl);
   _setEditorText({});
 }
 
-function editJsonButton(e) {
+function editButton(e) {
   var $aTag      = $(this).parents("td").find("a");
   var requestUrl  = $aTag.text();
 
@@ -40,7 +40,7 @@ function editJsonButton(e) {
   });
 }
 
-function deleteJsonButton(e) {
+function deleteButton(e) {
   var $aTag      = $(this).parents("td").find("a");
   var requestUrl  = $aTag.text();
 

@@ -11,11 +11,19 @@ function addEventOnBtnCardMainAdd() {
   elBtnCardMainAdd.addEventListener("click", function(e) {
     var elModal = document.getElementById("myModal");
     var elsInput = elModal.querySelectorAll('input');
+    var elsTextarea = elModal.querySelectorAll('textarea');
 
     elsInput.forEach(function(target) {
       target.value = '';
-      _setEditorText({});
     });
+
+    elsTextarea.forEach(function(target) {
+      target.value = '';
+    });
+
+    if (typeof _setEditorText === "function") {
+      _setEditorText({});
+    }
   });
 }
 
