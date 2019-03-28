@@ -29,7 +29,11 @@ body.darkmode .card,body.darkmode .modal-content {
   background-color: #222;
 }
 
-body.darkmode button.btn-card-header,body.darkmode p,body.darkmode label,body.darkmode .card,body.darkmode .modal-content {
+body.darkmode .modal-content {
+  border: 1px solid rgba(150, 150, 150, 0.4);
+}
+
+body.darkmode button.btn-card-header,body.darkmode p,body.darkmode label,body.darkmode .card,body.darkmode .modal-content, body.darkmode button.close {
   color: darkgray;
 }
 
