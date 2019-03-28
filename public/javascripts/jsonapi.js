@@ -12,13 +12,17 @@ function saveButton(e) {
   var jsonString  = _getEditorText();
   // console.log(requestUrl);
 
-  requestXhttp(requestUrl, "PUT", jsonString,
-  function(data) {
-    location.reload();
-  },
-  function(error) {
-    _errorValidateResult(error);
-  });
+  if (requestUrl) {
+    requestXhttp(requestUrl, "PUT", jsonString,
+    function(data) {
+      location.reload();
+    },
+    function(error) {
+      _errorValidateResult(error);
+    });
+  } else {
+    alert('URL은 필수값입니다.');
+  }
 }
 
 function addButton(e) {

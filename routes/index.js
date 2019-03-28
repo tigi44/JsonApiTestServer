@@ -100,7 +100,7 @@ router.post('/schemePost', function(req, res, next) {
       !json.name ||
       !json.uri) {
       res.status(422);
-      res.json("All fields must be not empty");
+      res.json("분류, 명칭, URI는 모두 필수값입니다.");
       return;
   }
 
