@@ -11,7 +11,7 @@ let editor               = new JSONEditor(container, options);
 insertValidateHTML();
 
 function insertValidateHTML() {
-  var spanValidate = '<div style="margin-top: 10px;"><button onclick="validateJsonButton(event);" class="btn btn-success float-right">VALIDATE</button><span id="span_validate_result"></span></div>';
+  var spanValidate = '<div style="margin-top: 10px;"><button onclick="validateJsonButton(event);" class="btn btn-success float-right">VALIDATE JSON</button><span id="span_validate_result"></span></div>';
   container.insertAdjacentHTML('afterend',spanValidate);
   spanValidateResultEl  = document.getElementById('span_validate_result');
 }
