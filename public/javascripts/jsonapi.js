@@ -22,7 +22,7 @@ function saveButton(e) {
 }
 
 function addButton(e) {
-  var requestUrl  = "/" + $(this).attr("data-key") + "/";
+  var requestUrl  = $(this).attr("data-key");
 
   $jsonUrlModal.val(requestUrl);
   _setEditorJson({});
