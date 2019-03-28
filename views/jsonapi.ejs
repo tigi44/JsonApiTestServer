@@ -7,7 +7,7 @@
     <link rel='stylesheet' href='/stylesheets/common.css' />
     <% include ./common/analytics.ejs %>
   </head>
-  <body>
+  <body <% if (darkmode) { %> class="darkmode" <% } %>>
 
   <header>
     <% include ./common/header.ejs %>

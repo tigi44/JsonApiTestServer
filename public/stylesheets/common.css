@@ -3,6 +3,43 @@ body {
   background-color: rgba(0, 0, 0, 0.04);
 }
 
+
+body.darkmode {
+  background-color: black;
+}
+
+body.darkmode .btn-outline-dark {
+  color: #6c757d;
+  background-color: transparent;
+  background-image: none;
+  border-color: #6c757d;
+}
+
+body.darkmode .btn-outline-dark.focus, .btn-outline-dark:focus {
+    box-shadow: 0 0 0 0.2rem rgba(108,117,125,.5);
+}
+
+body.darkmode .btn-outline-dark:hover {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+body.darkmode .card,.modal-content {
+  background-color: #222;
+}
+
+body.darkmode button.btn-card-header,p,label,.card,.modal-content {
+  color: darkgray;
+}
+
+body.darkmode input,body.darkmode input:focus,body.darkmode textarea,body.darkmode textarea:focus {
+  background-color: #222;
+  color: darkgray;
+  border-color: darkgray;
+}
+
+
 .float-left {
   float: left;
 }
@@ -187,6 +224,10 @@ tr td div.div-contents p {
     background-color: transparent;
     background-image: none;
     border-color: #6c757d;
+  }
+
+  .mobile-display-none {
+    display: none;
   }
 }
 

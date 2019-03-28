@@ -16,6 +16,12 @@ var renderView = function(req, viewName) {
   return renderView;
 };
 
+var darkmodeView = function(req) {
+  let darkmodeCookie = req.cookies.darkmode;
+
+  return darkmodeCookie;
+}
+
 /* GET json path list */
 router.get('/' + ff.extJson, function(req, res, next) {
   var files = ff.findFiles('./jsonFile');
@@ -37,7 +43,8 @@ router.get('/', function(req, res, next) {
       headerMenu        : 0,
       hierarchyFiles    : ff.hierarchyFiles(files),
       cardHtml          : html.card(ff.hierarchyFiles(files), true),
-      search            : search
+      search            : search,
+      darkmode          : darkmodeView(req)
     });
   }
 });
@@ -51,7 +58,8 @@ router.get('/scheme', function(req, res, next) {
     scheme            : ff.getFileJson(filePath, search),
     cardHtml          : html.card(ff.getFileJson(filePath, search), false),
     headerMenu        : 1,
-    search            : search
+    search            : search,
+    darkmode          : darkmodeView(req)
   });
 });
 router.post('/scheme', function(req, res, next) {
@@ -146,7 +154,8 @@ router.get('/apns', function(req, res, next) {
       apns              : ff.getFileJson(filePath, search),
       cardHtml          : html.card(ff.getFileJson(filePath, search), false),
       headerMenu        : 2,
-      search            : search
+      search            : search,
+      darkmode          : darkmodeView(req)
     });
   }
 });
@@ -214,14 +223,16 @@ router.post('/apns/sendpush', function(req, res, next) {
 router.get('/uriencodedecode', function(req, res, next) {
   res.render(renderView(req, 'uriencodedecode'), {
     title             : 'URI ENCODE / DECODE',
-    headerMenu        : 3
+    headerMenu        : 3,
+    darkmode          : darkmodeView(req)
   });
 });
 
 router.get('/regex', function(req, res, next) {
   res.render('regex', {
     title             : 'REGULAR EXPRESSION',
-    headerMenu        : 4
+    headerMenu        : 4,
+    darkmode          : darkmodeView(req)
   });
 });
 
