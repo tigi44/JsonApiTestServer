@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a id="a-logo" href=""></a>
-      <a id="a-brand-title" class="navbar-brand" href="" style="width:220px"><%= title %></a>
+      <a id="a-logo" href="/?view=old"></a>
+      <a id="a-brand-title" class="navbar-brand" href="?view=old" style="width:220px"><%= title %></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -8,16 +8,16 @@
       <div class="collapse navbar-collapse phone-header-div" id="navbarsExample02">
         <ul class="navbar-nav">
           <li class="nav-item <% if(headerMenu == 0){ %> active <% } %>">
-            <a class="nav-link" href="/">JsonApi</a>
+            <a class="nav-link" href="/?view=old">JsonApi</a>
           </li>
           <li class="nav-item <% if(headerMenu == 1){ %> active <% } %>">
-            <a class="nav-link" href="/scheme">Scheme</a>
+            <a class="nav-link" href="/scheme?view=old">Scheme</a>
           </li>
           <li class="nav-item <% if(headerMenu == 2){ %> active <% } %>">
-            <a class="nav-link" href="/apns">APNs</a>
+            <a class="nav-link" href="/apns?view=old">APNs</a>
           </li>
           <li class="nav-item <% if(headerMenu == 3){ %> active <% } %>">
-            <a class="nav-link" href="/uriencodedecode">URI en/de</a>
+            <a class="nav-link" href="/uriencodedecode?view=old">URI en/de</a>
           </li>
           <!-- <li class="nav-item <% if(headerMenu == 4){ %> active <% } %>">
             <a class="nav-link" href="/regex">RegEx</a>
@@ -30,6 +30,7 @@
         <form class="form-inline my-2 my-md-0 ml-4" action="">
           <div class="input-group">
             <input type="text" class="form-control phone-no-border-radius" name="search" placeholder="SEARCH" aria-label="SEARCH" value="<%= search %>">
+            <input type="hidden" name="view" value="old">
             <div class="input-group-append">
               <button class="btn btn-secondary phone-no-border-radius" type="submit"><i class="material-icons size-24 vertical-middle">search</i></button>
             </div>
