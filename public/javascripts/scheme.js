@@ -48,7 +48,7 @@ function editButton(e) {
   let path = $(this).attr("data-key");
   let name = $divContents.find("p").text();
   let uri  = $divContents.find("a").text();
-  let desc = $divContents.find(".tooltip-area>textarea").text();
+  let desc = $divContents.find(".btn-tooltip>textarea").text();
 
   $inputPath.val(path);
   $inputName.val(name);

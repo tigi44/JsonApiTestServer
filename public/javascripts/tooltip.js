@@ -13,32 +13,30 @@ function adjustTooltipHeight() {
 }
 
 function tooltipButton(e) {
-  var target = e.target;
-  var $divTooltipArea = $(target).parents("div.tooltip-area");
+  var $btnTooltip = $(this);
 
-  toggleTooltip($divTooltipArea)
+  toggleTooltip($btnTooltip)
 }
 
-function toggleTooltip($divTooltipArea, hastohide) {
-  var $buttonTooltip = $divTooltipArea.find("button.btn-tooltip");
-  var $textareaTooltip = $divTooltipArea.find("textarea.tooltiptext");
+function toggleTooltip($btnTooltip) {
+  var $textareaTooltip = $btnTooltip.find("textarea.tooltiptext");
   var classTTVisible = "tooltiptext-visible";
   var classBtnDescOutline = "btn-outline-secondary";
   var classBtnDesc = "btn-secondary";
-  var $materialIcon = $buttonTooltip.find("i.material-icons");
+  var $materialIcon = $btnTooltip.find("i.material-icons");
   var textMaterialIconHelp = "help";
   var textMaterialIconCheck = "check_circle";
 
 
-  if ($textareaTooltip.hasClass(classTTVisible) && !hastohide) {
+  if ($textareaTooltip.hasClass(classTTVisible)) {
     $textareaTooltip.removeClass(classTTVisible);
     $materialIcon.text(textMaterialIconCheck);
-    $buttonTooltip.removeClass(classBtnDescOutline);
-    $buttonTooltip.addClass(classBtnDesc);
+    $btnTooltip.removeClass(classBtnDescOutline);
+    $btnTooltip.addClass(classBtnDesc);
   } else {
     $textareaTooltip.addClass(classTTVisible);
     $materialIcon.text(textMaterialIconHelp);
-    $buttonTooltip.addClass(classBtnDescOutline);
-    $buttonTooltip.removeClass(classBtnDesc);
+    $btnTooltip.addClass(classBtnDescOutline);
+    $btnTooltip.removeClass(classBtnDesc);
   }
 }

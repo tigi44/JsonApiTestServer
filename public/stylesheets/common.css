@@ -27,7 +27,7 @@ nav div.div-navbar {
   max-width: 1024px;
   padding: 0 22px;
   position: relative;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 nav div.div-navbar ul.navbar-nav {
@@ -139,7 +139,7 @@ tr td div.div-contents {
   float: left;
 }
 
-tr td div.div-contents .tooltip-area {
+tr td div.div-contents .btn-tooltip {
   float: left;
   margin-right: 5px;
 }
