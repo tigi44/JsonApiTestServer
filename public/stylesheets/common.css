@@ -15,7 +15,7 @@ body.darkmode .btn-outline-dark {
   border-color: #6c757d;
 }
 
-body.darkmode .btn-outline-dark.focus, .btn-outline-dark:focus {
+body.darkmode .btn-outline-dark.focus,body.darkmode .btn-outline-dark:focus {
     box-shadow: 0 0 0 0.2rem rgba(108,117,125,.5);
 }
 
@@ -25,11 +25,11 @@ body.darkmode .btn-outline-dark:hover {
     border-color: #6c757d;
 }
 
-body.darkmode .card,.modal-content {
+body.darkmode .card,body.darkmode .modal-content {
   background-color: #222;
 }
 
-body.darkmode button.btn-card-header,p,label,.card,.modal-content {
+body.darkmode button.btn-card-header,body.darkmode p,body.darkmode label,body.darkmode .card,body.darkmode .modal-content {
   color: darkgray;
 }
 
