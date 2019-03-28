@@ -194,6 +194,37 @@ tr td div.div-contents p {
 }
 
 
+/* footer */
+
+footer {
+  margin: 20px 0;
+}
+
+footer ul {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  color: darkgray;
+}
+
+footer ul>li {
+  list-style-type: none;
+  text-align: center;
+  margin: 0 10px;
+  font-size: 12px;
+}
+
+footer .footer-logo {
+  width: 11px;
+  height: 11px;
+}
+
+footer a {
+  color: darkgray;
+  text-decoration: underline;
+}
+
+
 /* mobile view */
 
 @media ( max-width: 1024px ) {
