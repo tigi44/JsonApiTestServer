@@ -8,6 +8,10 @@ body.darkmode {
   background-color: black;
 }
 
+body.darkmode .navbar{
+  background-color: #222!important
+}
+
 body.darkmode .btn-outline-dark {
   color: #6c757d;
   background-color: transparent;

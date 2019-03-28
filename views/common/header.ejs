@@ -40,9 +40,9 @@
       </div>
 
       <% if (darkmode) { %>
-          <button class="btn btn-light btn-sm" onclick="document.cookie='darkmode='; location.reload();" title="Default Mode!!"><i class="material-icons">web_asset</i></button>
+          <button type="button" class="btn btn-light btn-sm" onclick="document.cookie='darkmode='; location.reload();" title="Default Mode!!"><i class="material-icons">web_asset</i></button>
       <% } else {%>
-          <button class="btn btn-secondary btn-sm" onclick="document.cookie='darkmode=true'; location.reload();" title="Dark Mode!!"><i class="material-icons">web_asset</i></button>
+          <button type="button" class="btn btn-dark btn-sm" onclick="document.cookie='darkmode=true'; location.reload();" title="Dark Mode!!" style="background-color: black;border-color: black;"><i class="material-icons">web_asset</i></button>
       <% } %>
 
 </nav>
