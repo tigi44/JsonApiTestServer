@@ -2,13 +2,13 @@
 <html>
   <head>
     <title><%= title %></title>
-    <% include ./common/commonCss.ejs %>
+    <% include ../common/commonCss.ejs %>
     <link rel='stylesheet' href='/stylesheets/old/styleIndex.css' />
-    <% include ./common/analytics.ejs %>
+    <% include ../common/analytics.ejs %>
   </head>
   <body>
   <header>
-    <% include ./common/header_old.ejs %>
+    <% include ./common/header.ejs %>
   </header>
 
   <main class="container" role="main">
@@ -21,6 +21,6 @@
   </main>
   </body>
 
-  <% include ./common/commonScript.ejs %>
+  <% include ../common/commonScript.ejs %>
   <script src="/javascripts/old/uriencodedecode.js"></script>
 </html>

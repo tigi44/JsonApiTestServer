@@ -3,15 +3,15 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
-    <% include ./common/commonCss.ejs %>
+    <% include ../common/commonCss.ejs %>
     <link rel='stylesheet' href='/stylesheets/old/styleIndex.css' />
     <link rel='stylesheet' href='/stylesheets/tooltip.css' />
-    <% include ./common/analytics.ejs %>
+    <% include ../common/analytics.ejs %>
   </head>
   <body>
 
     <header>
-      <% include ./common/header_old.ejs %>
+      <% include ./common/header.ejs %>
     </header>
 
     <main class="container" role="main">
@@ -56,8 +56,9 @@
                             <div class="">
                               <% if(scheme[pathKey][nameKey].desc){ %>
                               <div class="tooltip-area">
-                                <button onclick="tooltipButton(event);" class="btn btn-outline-dark btn-sm btn-tooltip"><span>설명&nbsp;</span><i class="material-icons float-right">help</i></button>
-                                <textarea class="tooltiptext tooltiptext-visible" readonly><%= scheme[pathKey][nameKey].name %> : &#10;&#10;<%= scheme[pathKey][nameKey].desc %></textarea>
+                                <button onclick="tooltipButton(event);" class="btn btn-outline-dark btn-sm btn-tooltip"><span>설명&nbsp;</span><i class="material-icons float-right">help</i>
+                                  <textarea class="tooltiptext tooltiptext-visible" readonly><%= scheme[pathKey][nameKey].name %> : &#10;&#10;<%= scheme[pathKey][nameKey].desc %></textarea>
+                                </button>
                               </div>
                               <% } %>
                               <span><%= scheme[pathKey][nameKey].name %></span><br>
@@ -101,7 +102,7 @@
     </main>
     </body>
 
-    <% include ./common/commonScript.ejs %>
+    <% include ../common/commonScript.ejs %>
     <script src="/javascripts/old/scheme.js"></script>
     <script src="/javascripts/old/common.js"></script>
 </html>

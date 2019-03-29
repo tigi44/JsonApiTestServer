@@ -5,12 +5,13 @@ var ff      = require('../routes/findFile');
 var apn     = require('../routes/apns');
 var html    = require('../routes/html');
 
+
 var renderView = function(req, viewName) {
   var renderView = viewName;
   var viewVersionParam = req.query.view;
 
-  if (viewVersionParam === 'old') {
-    renderView += '_old';
+  if (viewVersionParam) {
+    renderView = viewVersionParam + '/' +renderView;
   }
 
   return renderView;
@@ -21,6 +22,7 @@ var darkmodeView = function(req) {
 
   return darkmodeCookie;
 }
+
 
 /* GET json path list */
 router.get('/' + ff.extJson, function(req, res, next) {
