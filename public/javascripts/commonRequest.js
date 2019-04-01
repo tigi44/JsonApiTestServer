@@ -1,11 +1,11 @@
 function requestXhttp(url, method, data, successCallback, errorCallback) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState == 4 && (200 <= this.status && this.status < 300)) {
       if (successCallback) {
         successCallback(this.responseText);
       }
-    } else if (this.readyState == 4 && this.status != 200) {
+    } else if (this.readyState == 4 && !(200 <= this.status && this.status < 300)) {
       if (errorCallback) {
         errorCallback(!this.responseText ? 'SERVER ERROR' : this.responseText);
       } else {
