@@ -5,18 +5,17 @@ var path    = require('path');
 var url     = require('url');
 var ff      = require('../routes/findFile');
 
-// get
+// get : read
 router.get('/', function(req, res, next) {
   var resultData;
   var reqPath  = getFilePathByRequest(req);
   var filePath = addExtNameJson(reqPath);
 
   try {
-    if (fs.existsSync(reqPath) && fs.lstatSync(reqPath).isDirectory()) {
+    if (isDirectory(reqPath)) {
       resultData = ff.hierarchyFiles(ff.findFiles(reqPath));
-    } else if (fs.existsSync(filePath) && fs.lstatSync(filePath).isFile()) {
-      var fileString = fs.readFileSync(filePath, 'utf8');
-      resultData = JSON.parse(fileString);
+    } else if (isExistFile(filePath)) {
+      resultData = readData(filePath);
     } else {
       next();
     }
@@ -31,7 +30,7 @@ router.get('/', function(req, res, next) {
   res.json(resultData);
 });
 
-// post
+// post : create | read
 router.post('/', function(req, res, next) {
   var resultData;
   var json = req.body;
@@ -39,13 +38,11 @@ router.post('/', function(req, res, next) {
       filePath = addExtNameJson(filePath);
 
   try {
-    if (fs.existsSync(filePath) && fs.lstatSync(filePath).isFile()) {
-      var fileString = fs.readFileSync(filePath, 'utf8');
-      resultData = JSON.parse(fileString);
+    if (isExistFile(filePath)) {
+      resultData = readData(filePath);
     } else {
-      mkdirp(filePath);
-      fs.writeFileSync(filePath, JSON.stringify(json), 'utf8');
-      resultData = json;
+      resultData = createData(filePath, json);
+      res.status(201);
     }
   } catch(e) {
     // console.log(e);
@@ -54,10 +51,11 @@ router.post('/', function(req, res, next) {
     err.status = 500;
     next(err);
   }
+
   res.json(resultData);
 });
 
-// put
+// put : update | create
 router.put('/', function(req, res, next) {
   var resultData;
   var json = req.body;
@@ -65,9 +63,12 @@ router.put('/', function(req, res, next) {
       filePath = addExtNameJson(filePath);
 
   try {
-    mkdirp(filePath);
-    fs.writeFileSync(filePath, JSON.stringify(json), 'utf8');
-    resultData = json;
+    if (isExistFile(filePath)) {
+      resultData = updateData(filePath, json);
+    } else {
+      resultData = createData(filePath, json);
+      res.status(201);
+    }
   } catch(e) {
     // console.log(e);
     var errorMessage = 'Fail Put';
@@ -75,18 +76,22 @@ router.put('/', function(req, res, next) {
     err.status = 500;
     next(err);
   }
+
   res.json(resultData);
 });
 
-// delete
+// delete : delete
 router.delete('/', function(req, res, next) {
   var resultData;
   var filePath = getFilePathByRequest(req);
       filePath = addExtNameJson(filePath);
 
   try {
-    fs.unlinkSync(filePath);
-    resultData = 'Success Delete';
+    if (isExistFile(filePath)) {
+      resultData = deleteData(filePath);
+    } else {
+      res.status(204);
+    }
   } catch(e) {
     // console.log(e);
     var errorMessage = 'Fail Delete';
@@ -94,8 +99,12 @@ router.delete('/', function(req, res, next) {
     err.status = 500;
     next(err);
   }
+
   res.json(resultData);
 });
+
+
+// private function
 
 function addExtNameJson(urlPath) {
   var resultPath;
@@ -123,10 +132,56 @@ function getFilePathByRequest(req) {
 function mkdirp(filePath) {
   var dirname = path.dirname(filePath);
   if (fs.existsSync(dirname)) {
-    return true;
+    return false;
   }
+
   mkdirp(dirname);
   fs.mkdirSync(dirname);
+
+  return true;
+}
+
+function isDirectory(reqPath) {
+  return fs.existsSync(reqPath) && fs.lstatSync(reqPath).isDirectory();
+}
+
+function isExistFile(filePath) {
+  return fs.existsSync(filePath) && fs.lstatSync(filePath).isFile();
+}
+
+
+// function : create, read, update, delete
+
+function createData(filePath, json) {
+  let resultData;
+
+  mkdirp(filePath);
+  fs.writeFileSync(filePath, JSON.stringify(json), 'utf8');
+  resultData = json;
+
+  return resultData;
+}
+
+function readData(filePath) {
+  let resultData;
+
+  let fileString = fs.readFileSync(filePath, 'utf8');
+  resultData = JSON.parse(fileString);
+
+  return resultData;
+}
+
+function updateData(filePath, json) {
+  return createData(filePath, json);
+}
+
+function deleteData(filePath) {
+  let resultData;
+
+  fs.unlinkSync(filePath);
+  resultData = 'Success Delete';
+
+  return resultData;
 }
 
 module.exports = router;
