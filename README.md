@@ -50,6 +50,13 @@ $ NODE_ENV=production npm start
 ![Image](./public/readmeImage/example_post_body.png)
 - if you add postfix '.json' to api url, the 'Content-Type' will be changed to 'application/json'
 
+## Read API PATH
+```
+http://localhost:3000/test       --> find `test.json` file
+http://localhost:3000/test.json  --> find `test.json` file
+http://localhost:3000/test/      --> find a file list in the `test` directory
+```
+
 ## #set env....
 ```
 $ export NODE_ENV=development
