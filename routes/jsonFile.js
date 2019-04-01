@@ -12,10 +12,10 @@ router.get('/', function(req, res, next) {
   var filePath = addExtNameJson(reqPath);
 
   try {
-    if (isDirectory(reqPath)) {
-      resultData = ff.hierarchyFiles(ff.findFiles(reqPath));
-    } else if (isExistFile(filePath)) {
+    if (isExistFile(filePath)) {
       resultData = readData(filePath);
+    } else if (isDirectory(reqPath)) {
+      resultData = ff.hierarchyFiles(ff.findFiles(reqPath));
     } else {
       next();
     }
@@ -117,7 +117,7 @@ function addExtNameJson(urlPath) {
       resultPath = urlPath.replace(extname, ff.extJson);
     }
   } else {
-    resultPath = urlPath + ff.extJson;
+    resultPath = urlPath.endsWith(ff.extJson) ? urlPath : urlPath + ff.extJson;
   }
 
   return resultPath;
