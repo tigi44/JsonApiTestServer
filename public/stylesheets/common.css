@@ -4,6 +4,8 @@ body {
 }
 
 
+/* darkmode */
+
 body.darkmode {
   background-color: black;
 }
@@ -38,13 +40,17 @@ body.darkmode .modal-content {
 }
 
 body.darkmode button.btn-card-header,body.darkmode p,body.darkmode label,body.darkmode .card,body.darkmode .modal-content, body.darkmode button.close {
-  color: darkgray;
+  color: lightgray;
 }
 
 body.darkmode input,body.darkmode input:focus,body.darkmode textarea,body.darkmode textarea:focus {
   background-color: #292e33;
-  color: darkgray;
-  border-color: darkgray;
+  color: white;
+  border-color: gray;
+}
+
+body.darkmode table.table td:hover {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 
@@ -168,6 +174,7 @@ table.table td {
   border-top: 0;
   padding: .8rem
 }
+
 table.table td:hover {
   background-color: rgba(0, 0, 0, 0.04);
 }
@@ -230,6 +237,17 @@ footer .footer-logo {
 footer a {
   color: darkgray;
   text-decoration: underline;
+}
+
+
+/* modal */
+
+.modal-header {
+  border-bottom: 0!important;
+}
+
+.modal-footer {
+  border-top: 0!important;
 }
 
 
