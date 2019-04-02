@@ -9,7 +9,7 @@ body.darkmode {
 }
 
 body.darkmode .navbar{
-  background-color: #222!important
+  background-color: #292e33!important
 }
 
 body.darkmode .btn-outline-dark {
@@ -30,7 +30,7 @@ body.darkmode .btn-outline-dark:hover {
 }
 
 body.darkmode .card,body.darkmode .modal-content {
-  background-color: #222;
+  background-color: #292e33;
 }
 
 body.darkmode .modal-content {
@@ -42,7 +42,7 @@ body.darkmode button.btn-card-header,body.darkmode p,body.darkmode label,body.da
 }
 
 body.darkmode input,body.darkmode input:focus,body.darkmode textarea,body.darkmode textarea:focus {
-  background-color: #222;
+  background-color: #292e33;
   color: darkgray;
   border-color: darkgray;
 }

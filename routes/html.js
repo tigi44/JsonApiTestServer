@@ -70,8 +70,8 @@ module.exports = {
     cardHtml += '<div class="card-main-header">';
     cardHtml += '<button id="btn-card-main-add" class="btn btn-outline-dark btn-sm float-right" data-toggle="modal" data-target="#myModal"><i class="material-icons mi-large">add</i></button>';
     cardHtml += '<div class="btn-group btn-group-toggle" data-toggle="buttons">';
-    cardHtml += '<label class="btn btn-outline-secondary active"><input type="radio" name="radio-card" value="agenda" autocomplete="off" checked><i class="material-icons mi-large">view_agenda</i></label>';
-    cardHtml += '<label class="btn btn-outline-secondary"><input type="radio" name="radio-card" value="headline" autocomplete="off" checked><i class="material-icons mi-large">view_headline</i></label>';
+    cardHtml += '<label class="btn btn-outline-dark active"><input type="radio" name="radio-card" value="agenda" autocomplete="off" checked><i class="material-icons mi-large">view_agenda</i></label>';
+    cardHtml += '<label class="btn btn-outline-dark"><input type="radio" name="radio-card" value="headline" autocomplete="off" checked><i class="material-icons mi-large">view_headline</i></label>';
     cardHtml += '</div>';
     cardHtml += '</div>';
 
