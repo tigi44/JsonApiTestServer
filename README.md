@@ -1,4 +1,5 @@
-![Image](./public/favicon.ico)
+![Image](./public/logo_black_128.png)
+![Image](./public/logo_white_128.png)
 # JsonApiTestServer
 [![Build Status](https://travis-ci.org/tigi44/JsonApiTestServer.svg?branch=master)](https://travis-ci.org/tigi44/JsonApiTestServer)
 
