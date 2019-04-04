@@ -5,13 +5,12 @@ define(['jquery', 'module/request', 'module/jsonEditor'], function($, REQUEST, J
   $(document).on('click', '.btn-card-edit', editButton);
   $(document).on('click', '.btn-card-delete', deleteButton);
 
-  let _jsonEditor = new JSONEDITOR();
   let $jsonUrlModal = $("#input_json_url");
 
   function saveButton(e) {
     var $inputTag  = $("#input_json_url");
     var requestUrl  = $inputTag.val();
-    var jsonString  = _jsonEditor.getEditorText();
+    var jsonString  = JSONEDITOR.getEditorText();
     // console.log(requestUrl);
 
     if (requestUrl) {
@@ -20,7 +19,7 @@ define(['jquery', 'module/request', 'module/jsonEditor'], function($, REQUEST, J
         location.reload();
       },
       function(error) {
-        _jsonEditor.errorValidateResult(error);
+        JSONEDITOR.errorValidateResult(error);
       });
     } else {
       alert('URL은 필수값입니다.');
@@ -31,7 +30,7 @@ define(['jquery', 'module/request', 'module/jsonEditor'], function($, REQUEST, J
     var requestUrl  = $(this).attr("data-key");
 
     $jsonUrlModal.val(requestUrl);
-    _jsonEditor.setEditorJson({});
+    JSONEDITOR.setEditorJson({});
   }
 
   function editButton(e) {
@@ -42,7 +41,7 @@ define(['jquery', 'module/request', 'module/jsonEditor'], function($, REQUEST, J
       var json = JSON.parse(jsonString);
 
       $jsonUrlModal.val(requestUrl);
-      _jsonEditor.setEditorJson(json);
+      JSONEDITOR.setEditorJson(json);
     });
   }
 
@@ -58,6 +57,6 @@ define(['jquery', 'module/request', 'module/jsonEditor'], function($, REQUEST, J
   }
 
   return function() {
-    this.jsonEditor = _jsonEditor;
+    this.jsonEditor = JSONEDITOR;
   };
 });

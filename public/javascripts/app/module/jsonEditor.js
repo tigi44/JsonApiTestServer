@@ -73,10 +73,10 @@ define(['jsoneditor'], function(JSONEditor) {
     errorValidateResult('');
   }
 
-  return function() {
-    this.errorValidateResult = errorValidateResult;
-    this.getEditorText = getEditorText;
-    this.getEditorJson = getEditorJson;
-    this.setEditorJson = setEditorJson;
+  return {
+    errorValidateResult : errorValidateResult,
+    getEditorText : getEditorText,
+    getEditorJson : getEditorJson,
+    setEditorJson : setEditorJson
   };
 });

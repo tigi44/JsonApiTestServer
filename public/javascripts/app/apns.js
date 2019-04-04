@@ -6,8 +6,6 @@ define(['jquery', 'module/request', 'module/jsonEditor'], function($, REQUEST, J
   $(document).on('click', '.btn-card-edit', editButton);
   $(document).on('click', '.btn-card-delete', deleteButton);
 
-  let _jsonEditor = new JSONEDITOR();
-
   function saveButton(e) {
     let $modal = $("#myModal");
     var path = $modal.find("[name=path]").val();
@@ -15,7 +13,7 @@ define(['jquery', 'module/request', 'module/jsonEditor'], function($, REQUEST, J
     var production = $modal.find("[name=production]:checked").val();
 
     try {
-      var notification = _jsonEditor.getEditorJson();
+      var notification = JSONEDITOR.getEditorJson();
       var json = {
         path : path,
         token : token,
@@ -32,7 +30,7 @@ define(['jquery', 'module/request', 'module/jsonEditor'], function($, REQUEST, J
         }
       );
     } catch (error) {
-      _jsonEditor.errorValidateResult(error);
+      JSONEDITOR.errorValidateResult(error);
     }
   }
 
@@ -41,7 +39,7 @@ define(['jquery', 'module/request', 'module/jsonEditor'], function($, REQUEST, J
     var path = $modal.find("[name=path]").val();
     var token = $modal.find("[name=token]").val();
     var production = $modal.find("[name=production]:checked").val();
-    var notification = _jsonEditor.getEditorJson();
+    var notification = JSONEDITOR.getEditorJson();
 
     var json = {
       path : path,
@@ -66,7 +64,7 @@ define(['jquery', 'module/request', 'module/jsonEditor'], function($, REQUEST, J
     $modal.find("[name=path]").val(path);
     $modal.find("[name=token]").val('');
     $modal.find("[name=production]").eq(0).prop('checked', true);
-    _jsonEditor.setEditorJson({});
+    JSONEDITOR.setEditorJson({});
   }
 
   function editButton(e) {
@@ -80,9 +78,9 @@ define(['jquery', 'module/request', 'module/jsonEditor'], function($, REQUEST, J
       $modal.find("[name=token]").val(json.token);
       $modal.find("input[name=production]").eq(json.production).prop("checked", true);
       try {
-        _jsonEditor.setEditorJson(json.notification);
+        JSONEDITOR.setEditorJson(json.notification);
       } catch(e) {
-        _jsonEditor.setEditorJson({});
+        JSONEDITOR.setEditorJson({});
       }
     });
   }
@@ -106,7 +104,7 @@ define(['jquery', 'module/request', 'module/jsonEditor'], function($, REQUEST, J
   }
 
   return function() {
-    this.jsonEditor = _jsonEditor;
+    this.jsonEditor = JSONEDITOR;
   };
 
 });
