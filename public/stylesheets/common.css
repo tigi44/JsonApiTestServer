@@ -53,6 +53,10 @@ body.darkmode table.table td:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+body.darkmode footer .footer-logo {
+  background-image: url(/logo_black_256.png);
+}
+
 
 .float-left {
   float: left;
@@ -230,8 +234,13 @@ footer ul>li {
 }
 
 footer .footer-logo {
-  width: 13px;
-  height: 13px;
+  float: left;
+  display: block;
+  width: 18px;
+  height: 18px;
+  background-size: 18px;
+  margin-right: 2px;
+  background-image: url(/logo_white_256.png);
 }
 
 footer a {
