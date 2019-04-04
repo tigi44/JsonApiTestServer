@@ -52,8 +52,11 @@
   </body>
 
   <% include ./common/commonScript.ejs %>
-  <script src="/javascripts/jsoneditor/dist/jsoneditor.min.js"></script>
-  <script src="/javascripts/commonCard.js"></script>
-  <script src="/javascripts/jsonEditor.js"></script>
-  <script src="/javascripts/jsonapi.js"></script>
+  <script type="text/javascript">
+    requirejs(['module/card', 'jsonapi', 'bootstrap'], function (CARD, APP) {
+      let app = new APP();
+      CARD(app.jsonEditor);
+    });
+  </script>
+
 </html>

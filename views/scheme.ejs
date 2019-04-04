@@ -67,7 +67,9 @@
     </body>
 
     <% include ./common/commonScript.ejs %>
-    <script src="/javascripts/commonCard.js"></script>
-    <script src="/javascripts/tooltip.js"></script>
-    <script src="/javascripts/scheme.js"></script>
+    <script type="text/javascript">
+      requirejs(['scheme', 'module/card', 'module/tooltip', 'bootstrap'], function (APP) {
+        APP();
+      });
+    </script>
 </html>

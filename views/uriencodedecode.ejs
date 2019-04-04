@@ -17,14 +17,19 @@
       <label for="textarea_uri">URI :</label>
       <textarea id="textarea_uri" class="form-control" rows="5"></textarea>
     </div>
-      <button onclick="encodeUri(event);" class="btn btn-dark btn-sm">Encode</button>
-      <button onclick="decodeUri(event);" class="btn btn-dark btn-sm">Decode</button>
+      <button id="encode_uri" class="btn btn-dark btn-sm">Encode</button>
+      <button id="decode_uri" class="btn btn-dark btn-sm">Decode</button>
   </main>
 
   <% include ./common/footer.ejs %>
-  
+
   </body>
 
   <% include ./common/commonScript.ejs %>
-  <script src="/javascripts/uriencodedecode.js"></script>
+  <script type="text/javascript">
+    requirejs(['uriencodedecode'], function (APP) {
+      APP();
+    });
+  </script>
+
 </html>
