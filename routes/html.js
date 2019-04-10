@@ -81,10 +81,11 @@ module.exports = {
     if (pathKeysLength > 0) {
       let columnCount = 2;
       let rowCount = Math.ceil(pathKeysLength / columnCount);
+      let singleColumnClass = (pathKeysLength == 1) ? 'single-column' : '';
 
       cardHtml += '<div class="row">';
         for(let i = 0; i < columnCount; i++) {
-          cardHtml += '<div class="column">';
+          cardHtml += '<div class="column ' + singleColumnClass + '">';
             for(let j = 0; j < rowCount; j++) {
               let pathIndex = i * Number(rowCount) + j;
               if (pathIndex < pathKeysLength) {
