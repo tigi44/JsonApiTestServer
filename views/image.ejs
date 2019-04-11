@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <% include ./common/commonCss.ejs %>
+    <link rel='stylesheet' href='/stylesheets/common.css' />
+    <% include ./common/analytics.ejs %>
+  </head>
+  <body <% if (darkmode) { %> class="darkmode" <% } %>>
+
+    <header>
+      <% include ./common/header.ejs %>
+    </header>
+
+    <main class="container fileUpload" role="main">
+
+      <div class="column single-column upload-column">
+        <div class="card">
+          <form method="POST" enctype="multipart/form-data">
+            <div class="custom-file">
+              <div class="input-group mb-3">
+                <label class="file-upload-label" for="customFile">Choose file</label>
+                <input type="file" class="custom-file-input form-control" name="fileUpload" id="customFile">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-dark" type="submit">UPLOAD</button>
+                </div>
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <%- cardHtml %>
+    </main>
+
+    <% include ./common/footer.ejs %>
+
+    </body>
+
+    <% include ./common/commonScript.ejs %>
+    <script type="text/javascript">
+      requirejs(['image', 'module/card', 'bootstrap'], function (APP) {
+        APP();
+      });
+    </script>
+</html>

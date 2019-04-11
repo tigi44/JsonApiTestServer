@@ -42,3 +42,6 @@ apns/keys/key.pem
 
 # apns json file
 jsonApns/*
+
+# uploaded image file
+uploads/*

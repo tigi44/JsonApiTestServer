@@ -218,6 +218,50 @@ tr td div.div-contents p {
 }
 
 
+/* file upload */
+
+main.fileUpload .upload-column  {
+  width: 50%;
+  margin: 20px auto;
+}
+
+main.fileUpload .upload-column .card {
+  padding: 40px;
+}
+
+main.fileUpload .upload-column .file-upload-label{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: calc(2.25rem + 2px);
+  padding: .375rem .75rem;
+  line-height: 1.5;
+  color: #495057;
+  border-bottom: 1px solid #ced4da;
+}
+
+main.fileUpload .card-main-header button, main.fileUpload .btn-card-add, main.fileUpload .btn-card-edit {
+  display: none;
+}
+
+main.fileUpload .btn-card-delete {
+  border-top-left-radius: 0.2rem!important;
+  border-bottom-left-radius: 0.2rem!important;
+}
+
+main.fileUpload .card .img-fileUpload {
+  max-width: 100px;
+}
+
+main.fileUpload .card .file-stat {
+  font-size: 12px;
+}
+
+
+
+
 /* footer */
 
 footer {
@@ -268,6 +312,10 @@ footer a {
 /* mobile view */
 
 @media ( max-width: 1024px ) {
+  main.fileUpload .upload-column  {
+    width: 100%;
+  }
+
   div.column {
     flex: 100%;
     max-width: 100%;

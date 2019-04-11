@@ -3,7 +3,7 @@ var path    = require('path');
 
 module.exports = {
   extJson : '.json',
-  findFiles: function (startPath, search) {
+  findAnyFile: function (startPath, search, fileExt) {
     search = (search) ? search : "";
     if (!fs.existsSync(startPath)){
         console.log("No file dir ", startPath);
@@ -19,7 +19,7 @@ module.exports = {
           fileNames = fileNames.concat(this.findFiles(filename, search));
         } else {
           filename = filename.replace('jsonFile', '');
-          if (path.extname(filename) == this.extJson) {
+          if (!fileExt || path.extname(filename) == fileExt) {
             if (filename.toLowerCase().indexOf(search.toLowerCase()) > -1) {
               fileNames.push(filename);
             }
@@ -27,6 +27,9 @@ module.exports = {
         }
     }
     return fileNames;
+  },
+  findFiles: function (startPath, search) {
+    return this.findAnyFile(startPath, search, this.extJson)
   },
   hierarchyFiles: function (files) {
     var hierarchyFile = {};

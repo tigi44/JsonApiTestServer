@@ -15,6 +15,7 @@
     "express": "~4.15.5",
     "jsoneditor": "^5.14.1",
     "morgan": "~1.9.0",
+    "multer": "^1.4.1",
     "serve-favicon": "~2.4.5"
   }
 }
