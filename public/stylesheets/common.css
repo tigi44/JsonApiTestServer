@@ -240,6 +240,7 @@ main.fileUpload .upload-column .file-upload-label{
   line-height: 1.5;
   color: #495057;
   border-bottom: 1px solid #ced4da;
+  width: 90%;
 }
 
 main.fileUpload .card-main-header button, main.fileUpload .btn-card-add, main.fileUpload .btn-card-edit {
@@ -255,8 +256,22 @@ main.fileUpload .card .img-fileUpload {
   max-width: 100px;
 }
 
-main.fileUpload .card .file-stat {
-  font-size: 12px;
+main.fileUpload ul {
+  margin: 0;
+  padding: 0;
+}
+
+main.fileUpload ul.image-flex {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+main.fileUpload li {
+  list-style-type: none;
+  margin: 10px 5px;
+  padding: 0;
 }
 
 

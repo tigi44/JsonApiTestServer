@@ -6,16 +6,16 @@ var multer  = require('multer');
 var ff      = require('../routes/findFile');
 var apn     = require('../routes/apns');
 var html    = require('../routes/html');
-var fileUploadSplit = "__";
+var fileUpload = require('../routes/fileUpload');
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
-    callback(null, 'uploads/')
+    callback(null, fileUpload.uploadDirName + '/')
   }
   ,
   filename: function (req, file, callback) {
     let extension = path.extname(file.originalname);
     let basename = path.basename(file.originalname, extension);
-    callback(null, basename + fileUploadSplit + Date.now() + extension);
+    callback(null, basename + fileUpload.splitString + Date.now() + extension);
   }
 });
 var upload = multer({ storage: storage });
@@ -245,7 +245,7 @@ router.get('/uriencodedecode', function(req, res, next) {
 });
 
 router.get('/image', function(req, res, next) {
-  let fileUploadDir = './uploads';
+  let fileUploadDir = './' + fileUpload.uploadDirName;
 
   if (!fs.existsSync(fileUploadDir)){
       fs.mkdirSync(fileUploadDir);
@@ -253,31 +253,10 @@ router.get('/image', function(req, res, next) {
 
   let files = ff.findAnyFile(fileUploadDir);
 
-  // make a json for a card
-  let cardJson = {};
-  for (let index in files) {
-    let fileStat = fs.statSync(files[index]);
-    let fileName = files[index];
-    let filePath = fileName.split(fileUploadSplit)[0];
-        filePath = filePath.replace('uploads/', '');
-    let fileUrl  = req.protocol + '://' + req.headers.host + '/' + fileName;
-    let fileImgHtml = '<img class="img-fileUpload" src="' + fileUrl + '" /><div class="file-stat">File Size : ' + fileStat.size + ' Byte</div><div class="file-stat">File Upload Date : ' + fileStat.birthtime.toString() + '</div><br>';
-    let fileJson = {
-      "path" : filePath,
-      "name" : fileImgHtml,
-      "uri"  : fileUrl
-    }
-
-    if (!cardJson[filePath]) {
-      cardJson[filePath] = {};
-    }
-    cardJson[filePath][fileName] = fileJson;
-  }
-
   res.render('image', {
     title             : 'IMAGE UPLOAD SERVER',
     imageFiles        : files,
-    cardHtml          : html.card(cardJson, false),
+    cardHtml          : html.card(fileUpload.cardJson(files, req.protocol, req.headers.host), false),
     headerMenu        : 4,
     darkmode          : darkmodeView(req)
   });
@@ -295,7 +274,7 @@ router.delete('/image', function(req, res, next) {
   }
 
   try {
-    let filePath = 'uploads/' + json.name;
+    let filePath = fileUpload.uploadDirName + '/' + json.name;
     fs.unlinkSync(filePath);
   } catch (err) {
   }
