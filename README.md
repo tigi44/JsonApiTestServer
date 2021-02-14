@@ -1,73 +1,48 @@
 ![Image](./public/logo_black_128.png)
 ![Image](./public/logo_white_128.png)
-# JsonApiTestServer
-[![Build Status](https://travis-ci.org/tigi44/JsonApiTestServer.svg?branch=master)](https://travis-ci.org/tigi44/JsonApiTestServer)
 
-## FEATURE
+# NodeJS_MockJsonAPI_server
+
 - [NodeJS](https://nodejs.org)
-- [express](https://www.npmjs.com/package/express) module
+- [PM2](https://www.npmjs.com/package/pm2)
+- [express](https://www.npmjs.com/package/express)
 - [JSON Editor](https://github.com/josdejong/jsoneditor)
 
-## NodeJS
-- install NodeJS : Latest Current Version version
-- this project using v9.8.0
-- [NodeJS Download](https://nodejs.org/en/download/current/)
-- [npm registry](https://www.npmjs.com)
+# Install & Start
 
-## GET
-```
-git clone https://github.com/tigi44/JsonApiTestServer.git
+- Unit Test ([mocha](https://www.npmjs.com/package/mocha))
+```shell
+$ npm run test
 ```
 
-## INSTALL
-```
-$ npm install
+- ENV development (default PORT : 13000)
+```shell
+$ npm ci
+$ npm run dev
+or
+$ npm ci
+$ npm run dev-start
 ```
 
-## START
-- default port :3000
-```
-$ npm start
-```
-- set port :8080
-```
-$ PORT=8080 npm start
-```
-- debug mode
-```
-$ DEBUG=jsonapitestserver:* npm start
-```
-- node env
-```
-$ NODE_ENV=development npm start
-$ NODE_ENV=production npm start
+- ENV production (default PORT : 80)
+```shell
+$ npm ci
+$ npm run start
+or
+$ npm run deploy
 ```
 
 ## RESTful API
-- GET : Read (Content-Type -> application/json)
-- DELETE : Delete (Content-Type -> application/json)
-- POST : Create , Read (Content-Type -> application/json, BODY - raw data)
-- PUT : Update, Create (Content-Type -> application/json, BODY - raw data)
+- Content-Type : application/json
+- GET : Read
+- DELETE : Delete
+- POST : Create , Read
+- PUT : Update, Create
 ![Image](./public/readmeImage/example_post_body.png)
-- if you add postfix '.json' to api url, the 'Content-Type' will be changed to 'application/json'
 
 ## Read API PATH
 ```
-http://localhost:3000/test       --> find `test.json` file
-http://localhost:3000/test.json  --> find `test.json` file
-http://localhost:3000/test/      --> find a file list in the `test` directory
+http://localhost:13000/test       --> find `test.json` file
+http://localhost:13000/test.json  --> find `test.json` file
+http://localhost:13000/test/      --> find a file list in the `test` directory
 ```
-
-## #set env....
-```
-$ export NODE_ENV=development
-$ export NODE_ENV=production
-```
-```
-$ export DEBUG=jsonapitestserver:*
-```
-
-## #package
-### nodemon
-- auto restart nodejs package
-- https://www.npmjs.com/package/nodemon
