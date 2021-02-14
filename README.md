@@ -2,6 +2,7 @@
 ![Image](./public/logo_white_128.png)
 
 # NodeJS_MockJsonAPI_server
+![Node.js CI](https://github.com/tigi44/NodeJS_MockJsonAPI_server/workflows/Node.js%20CI/badge.svg)
 
 - [NodeJS](https://nodejs.org)
 - [PM2](https://www.npmjs.com/package/pm2)
@@ -38,6 +39,7 @@ $ npm run deploy
 - DELETE : Delete
 - POST : Create , Read
 - PUT : Update, Create
+
 ![Image](./public/readmeImage/example_post_body.png)
 
 ## Read API PATH
