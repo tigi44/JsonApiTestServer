@@ -1,63 +1,65 @@
-const express = require('express');
-const url     = require('url');
-const path    = require('path');
-const router  = express.Router();
-const Service = require('../Class/ServiceLayer/JsonFileService')
-const service = new Service()
+const express         = require('express');
+const url             = require('url');
+const path            = require('path');
+const router          = express.Router();
+
+const JsonFileService = require('../Class/ServiceLayer/JsonFileService')
+const jsonFileService = new JsonFileService()
+
 
 // get : read (file, directory)
-router.get('/', async(req, res, next) => {
+router.get('/', function(req, res, next) {
   var dirPath  = getFilePathByRequest(req);
   var filePath = addExtNameJson(dirPath);
 
-  var {data} = await service.getJsonFile(filePath)
-
-  if (data) {
-    res.json(data)
-  } else {
-    var {data} = await service.getJsonFiles(dirPath)
-
-    if (Object.keys(data).length > 0) {
-      res.json(data)
+  jsonFileService.getJsonFile(filePath).then(responseData => {
+    if (responseData.data) {
+      res.json(responseData.data)
     } else {
-      next();
+      jsonFileService.getJsonFiles(dirPath).then(responseData => {
+        if (Object.keys(responseData.data).length > 0) {
+          res.json(responseData.data)
+        } else {
+          next();
+        }
+      })
     }
-  }
+  })
 });
 
 // post : create | read
-router.post('/', async(req, res, next) => {
+router.post('/', function(req, res, next) {
   var jsonData = req.body;
   var filePath = getFilePathByRequest(req);
       filePath = addExtNameJson(filePath);
 
-  var {status, data} = await service.postJsonFile(filePath, jsonData)
-
-  res.status(status)
-  res.json(data)
+  jsonFileService.postJsonFile(filePath, jsonData).then(responseData => {
+    res.status(responseData.status)
+    res.json(responseData.data)
+  })
 });
 
 // put : update | create
-router.put('/', async(req, res, next) => {
+router.put('/', function(req, res, next) {
   var jsonData = req.body;
   var filePath = getFilePathByRequest(req);
       filePath = addExtNameJson(filePath);
 
-  var {status, data} = await service.putJsonFile(filePath, jsonData)
-
-  res.status(status)
-  res.json(data)
+  jsonFileService.putJsonFile(filePath, jsonData).then(responseData => {
+    res.status(responseData.status)
+    res.json(responseData.data)
+  })
 });
 
 // delete : delete
-router.delete('/', async(req, res, next) => {
+router.delete('/', function(req, res, next) {
   var filePath = getFilePathByRequest(req);
       filePath = addExtNameJson(filePath);
 
-  var {status, data} = await service.deleteJsonFile(filePath)
-
-  res.status(status)
-  res.json(data)
+  jsonFileService.deleteJsonFile(filePath).then(responseData => {
+    res.status(responseData.status)
+    res.json(responseData.data)
+  })
 });
 
 

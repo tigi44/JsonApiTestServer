@@ -1,4 +1,5 @@
 class JsonFileRepositoryInterface {
+  
   constructor(dataSource) {
     this.dataSource = dataSource;
   }

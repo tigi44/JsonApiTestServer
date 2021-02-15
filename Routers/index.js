@@ -1,31 +1,32 @@
-const express     = require('express');
-const router      = express.Router();
-const Service     = require('../Class/ServiceLayer/JsonFileService')
-const service     = new Service()
+const express           = require('express');
+const router            = express.Router();
+
+const JsonFileService   = require('../Class/ServiceLayer/JsonFileService')
+const jsonFileService   = new JsonFileService()
+
+const rootJsonFilePath  = './jsonFile'
 
 /* GET json path list */
-router.get('/.json', async(req, res, next) => {
-  var {data} = await service.getJsonFiles('./jsonFile')
-
-  res.json(data);
+router.get('/.json', function(req, res, next) {
+  jsonFileService.getJsonFiles(rootJsonFilePath).then(responseData => res.json(responseData.data))
 });
 
 /* GET home page. */
-router.get('/', async(req, res, next) => {
-  var search           = req.query.search;
-  var contentType      = req.headers['content-type'];
-  var rootJsonFilePath = './jsonFile'
-  var {data}           = await service.getJsonFiles(rootJsonFilePath, search)
+router.get('/', function(req, res, next) {
+  var search         = req.query.search;
+  var contentType    = req.headers['content-type'];
 
-  if (contentType == 'application/json') {
-    res.json(data);
-  } else {
-    res.render('index', {
-      title             : 'JSON API TEST SERVER',
-      hierarchyFiles    : data,
-      search            : search
-    });
-  }
+  jsonFileService.getJsonFiles(rootJsonFilePath, search).then(responseData => {
+    if (contentType == 'application/json') {
+      res.json(responseData.data);
+    } else {
+      res.render('index', {
+        title             : 'JSON API TEST SERVER',
+        hierarchyFiles    : responseData.data,
+        search            : search
+      });
+    }
+  })
 });
 
 module.exports = router;

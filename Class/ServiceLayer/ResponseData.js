@@ -8,6 +8,7 @@ class ResponseData {
      return {"status": this.status, "data": this.data};
   }
 
+  // ok
   static ok_200(data) {
     return new ResponseData(200, data)
   }
@@ -22,6 +23,7 @@ class ResponseData {
     return new ResponseData(204, data)
   }
 
+  // bad request
   static fail_400(data) {
     return new ResponseData(400, data)
   }

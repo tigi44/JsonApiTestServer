@@ -7,7 +7,7 @@ class JsonFileRepository extends JsonFileRepositoryInterface {
   }
 
   createJsonFile(filePath, jsonData) {
-      return Promise.resolve(this.dataSource.createJsonFile(filePath, jsonData))
+    return Promise.resolve(this.dataSource.createJsonFile(filePath, jsonData))
   }
 
   readJsonFile(filePath) {
