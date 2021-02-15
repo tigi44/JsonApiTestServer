@@ -41,10 +41,3 @@ $ npm run deploy
 - PUT : Update, Create
 
 ![Image](./public/readmeImage/example_post_body.png)
-
-## Read API PATH
-```
-http://localhost:13000/test       --> find `test.json` file
-http://localhost:13000/test.json  --> find `test.json` file
-http://localhost:13000/test/      --> find a file list in the `test` directory
-```

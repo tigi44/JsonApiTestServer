@@ -7,7 +7,7 @@ const JsonFileService = require('../Class/ServiceLayer/JsonFileService')
 const jsonFileService = new JsonFileService()
 
 
-// get : read (file, directory)
+// get : read (file)
 router.get('/', function(req, res, next) {
   var dirPath  = getFilePathByRequest(req);
   var filePath = addExtNameJson(dirPath);
@@ -16,13 +16,7 @@ router.get('/', function(req, res, next) {
     if (responseData.data) {
       res.json(responseData.data)
     } else {
-      jsonFileService.getJsonFiles(dirPath).then(responseData => {
-        if (Object.keys(responseData.data).length > 0) {
-          res.json(responseData.data)
-        } else {
-          next();
-        }
-      })
+      next();
     }
   })
 });
